@@ -27,6 +27,21 @@ module.exports = {
     favicon
   },
   plugins: [
+    {
+      resolve: "gatsby-source-wordpress",
+      options: {
+        baseUrl: "factly.in",
+        //https://factly.in/wp-json/wp/v2/posts?categories=420
+        protocol: "https",
+        restApiRoutePrefix: "wp-json",
+        hostingWPCOM: false,
+        useACF: false,
+        includedRoutes: [
+          "**/posts",
+          "**/categories"
+        ]
+      },
+    },
     '@bumped-inc/gatsby-plugin-optional-chaining',
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',

@@ -1,0 +1,64 @@
+import React from 'react';
+import Layout from '../components/layout';
+import Helmet from 'react-helmet';
+
+function PostTemplate({ data: { wordpressPost: post } }) {
+    return <Layout>
+        <Helmet
+            title={post.title}
+            meta={[
+            { name: 'description', content: post.excerpt },
+            ]}
+        />
+        <div className="stories fadeInUp"
+            style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
+            <div className="row justify-content-center">   
+                <div className="col col-8">
+                    <article>
+                        {/* <span className="cat-title">Coronavirus</span> */}
+                        <div className="title">
+                            <h1>
+                                <a href={`/stories/${post.slug}`} dangerouslySetInnerHTML={{__html: post.title}}></a>
+                            </h1>
+                            <h6 className="sub-title">Categories: {post.categories.map(function(category){
+                                    return category.name;
+                                }).join(", ")}</h6>
+                        </div>
+                        
+                        <div className="meta-info">
+                            <span className="author">{post.author_meta.display_name}</span>
+                            <i>|</i>
+                            <span className="date">{post.date}</span>
+                        </div>
+                        <a className="image-link" href={`/stories/${post.slug}`}>
+                            <img src={post.jetpack_featured_media_url} />
+                        </a>
+                        <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
+                    </article>
+                </div>
+            </div>
+        </div>
+    </Layout>
+}
+
+export default PostTemplate;
+
+export const query = graphql`
+  query($id: String!) {
+    wordpressPost(id: {eq: $id}){
+        id
+        date(formatString: "MMMM Do, YYYY")
+        slug
+        title
+        jetpack_featured_media_url
+        excerpt
+        content
+        categories{
+            name
+          }
+        author_meta{
+            display_name
+        }
+      }
+  }
+`;

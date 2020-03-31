@@ -162,7 +162,7 @@
     -webkit-touch-callout: none;
   }
   
-  h1, {
+  h1 {
     font-family: 'archia';
     font-size: 24px !important;
     font-weight: 900;
@@ -1527,5 +1527,165 @@
       text-transform: none;
       letter-spacing: 0.02em;
       text-align: center;
+    }
+  }
+
+  .stories{
+    a{
+      color: #252525;
+      text-decoration: none;
+    }
+    h2{
+      text-transform: none;
+      margin: 0;
+    }
+    h1{
+      font-family: "archia";
+      font-size: 24px!important;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    h6{
+      font-family: "archia";
+      font-size: 11px!important;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    margin-left: 10rem;
+    margin-right: 10rem;
+    article{
+      flex-direction: column;
+      padding: 0.5rem;
+      position: relative;
+    }
+    .heading{
+      color: #343a40;
+    }
+    .cat-title {
+      font-size: 11px;
+      letter-spacing: .015em;
+      line-height: 24px;
+      margin-left: 9px
+    }
+  
+    .cat-title {
+      position: absolute;
+      top: 1rem;
+      z-index: 1;
+      display: block;
+      padding: 0 10px;
+      margin-left: 7px;
+      max-width: 90%;
+      max-width: calc(100% - 14px);
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      background: #e54e53;
+      color: #fff;
+      line-height: 25px;
+      font-size: 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden
+    }
+
+    .image-link{
+      min-height: 42px;
+      display: block;
+      position: relative;
+      img{
+        display: block;
+        width: 100%;
+        height: auto
+      }
+    }
+    .title{
+      padding: 0;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .meta-info{
+      position: static;
+      margin: 0;
+      padding: 0;
+      background: 0 0;
+      color: #bcbcbc;
+      line-height: inherit;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5px;
+      .author{
+        padding-right: 0.5rem;
+      }
+      .date{
+        padding-left: 0.5rem;
+      }
+    }
+    .excerpt{
+      margin-top: 10px;
+      color: #777;
+    }
+    .sub-title{
+      margin-top: .25rem;
+      color: #6c757d;  
+    }
+    .content{
+      font-family: "archia";
+      font-size: 18px !important;
+      font-weight: 300;
+      width: 100%;
+      p{
+        width: 100%;
+        line-height: 1.5;
+      }
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .justify-content-center{
+    justify-content: center;
+  }
+  .align-items-center{
+    align-items: center;
+  }
+  .row{
+    display: flex;
+    flex-flow: row wrap;
+    .col{
+      display: flex;
+      flex-direction: column;
+    }
+    .col-4, .col-6, .col-12, .col-8{
+      flex-basis: 100%;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .stories{
+      margin-left: 10rem;
+      margin-right: 10rem;
+      article{
+        padding: 1rem;
+      }
+    }
+    .row{
+      .col-4{
+        flex-basis: 33%;
+      }
+      .col-6{
+        flex-basis: 50%;
+      }
+      .col-8{
+        flex-basis: 70%;
+        width: 70%
+      }
     }
   }
