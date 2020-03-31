@@ -2,7 +2,8 @@
 
 ## Local Setup
 
-Consider you have installed below items on your machine 
+Assume you have installed below items on your machine 
+
 ```
 node, npm, gatsby-cli, git, yarn
 ```
