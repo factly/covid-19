@@ -10,6 +10,10 @@ function PostTemplate({ data: { wordpressPost: post } }) {
             title={post.title}
             meta={[
             { name: 'description', content: post.excerpt },
+            {
+                property: 'og:image',
+                content: post.jetpack_featured_media_url.source_url
+              }
             ]}
         />
         <div className="stories fadeInUp"
@@ -60,7 +64,7 @@ export const query = graphql`
             source_url
             localFile{
               childImageSharp{
-                fluid(maxWidth: 500) {
+                fluid(maxWidth: 1000) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
               }

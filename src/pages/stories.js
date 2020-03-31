@@ -22,14 +22,14 @@ function Stories ({ data }) {
                         </a>
                         <div className="title">
                             <h2>
-                                <a href={`/stories/${post.node.slug}`} dangerouslySetInnerHTML={{__html: post.node.title.substring(0,50)}}></a>
+                                <a href={`/stories/${post.node.slug}`} dangerouslySetInnerHTML={{__html: `${post.node.title.substring(0,50)}...`}}></a>
                             </h2>
                         </div>
                         <div className="meta-info">
                             <span className="author">By {post.node.author_meta.display_name}</span>
                             <span className="date"> On {post.node.date}</span>
                         </div>
-                        <div className="excerpt"><p dangerouslySetInnerHTML={{ __html: post.node.excerpt.substring(0,100)}} /></div>
+                        <div className="excerpt" dangerouslySetInnerHTML={{ __html: `${post.node.excerpt.substring(0,100)}...`}} />
                     </article>
                 </div>)}
             </div>
@@ -53,7 +53,7 @@ export const query = graphql`
                 source_url
                 localFile{
                   childImageSharp{
-                    fluid(maxWidth: 500) {
+                    fluid(maxWidth: 1000) {
                         ...GatsbyImageSharpFluid_withWebp
                     }
                   }
