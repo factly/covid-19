@@ -1531,6 +1531,8 @@
   }
 
   .stories{
+    margin-left: 1rem;
+    margin-right: 1rem;
     a{
       color: #252525;
       text-decoration: none;
@@ -1553,8 +1555,6 @@
       text-transform: uppercase;
       margin: 0;
     }
-    margin-left: 10rem;
-    margin-right: 10rem;
     article{
       flex-direction: column;
       padding: 0.5rem;
