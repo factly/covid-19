@@ -21,9 +21,8 @@ function Stories ({ data }) {
                             </h2>
                         </div>
                         <div className="meta-info">
-                            <span className="author">{post.node.author_meta.display_name}</span>
-                            <i>|</i>
-                            <span className="date">{post.node.date}</span>
+                            <span className="author">By {post.node.author_meta.display_name}</span>
+                            <span className="date"> On {post.node.date}</span>
                         </div>
                         <div className="excerpt"><p dangerouslySetInnerHTML={{ __html: post.node.excerpt.substring(0,100)}} /></div>
                     </article>
