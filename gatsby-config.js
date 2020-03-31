@@ -38,7 +38,9 @@ module.exports = {
         useACF: false,
         includedRoutes: [
           "**/posts",
-          "**/categories"
+          "**/categories",
+          "**/media",
+          "**/tags",
         ]
       },
     },
