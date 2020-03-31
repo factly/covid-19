@@ -1,5 +1,7 @@
 import React from 'react';
+import Img  from 'gatsby-image';
 import Layout from '../components/layout';
+import { graphql } from 'gatsby'
 
 function Stories ({ data }) {
     return <Layout>
@@ -13,7 +15,10 @@ function Stories ({ data }) {
                     <article>
                         <span className="cat-title">Coronavirus</span>
                         <a className="image-link" href={`/stories/${post.node.slug}`}>
-                            <img src={post.node.jetpack_featured_media_url} />
+                        {post.node.jetpack_featured_media_url.localFile ? 
+                            <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
+                            <img src={post.node.jetpack_featured_media_url.source_url} />
+                        }
                         </a>
                         <div className="title">
                             <h2>
@@ -44,8 +49,16 @@ export const query = graphql`
             excerpt
             title
             slug
-            featured_img
-            jetpack_featured_media_url
+            jetpack_featured_media_url {
+                source_url
+                localFile{
+                  childImageSharp{
+                    fluid(maxWidth: 500) {
+                        ...GatsbyImageSharpFluid_withWebp
+                    }
+                  }
+                }
+            }
             date(formatString: "MMMM Do, YYYY")
             author_meta {
                 display_name

@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '../components/layout';
 import Helmet from 'react-helmet';
+import Img from 'gatsby-image';
+import { graphql } from 'gatsby'
 
 function PostTemplate({ data: { wordpressPost: post } }) {
     return <Layout>
@@ -33,7 +35,9 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                             <span className="date"> On {post.date}</span>
                         </div>
                         <a className="image-link" href={`/stories/${post.slug}`}>
-                            <img src={post.jetpack_featured_media_url} />
+                        { post.jetpack_featured_media_url.localFile ? 
+                        <Img fluid={post.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
+                        <img src={post.jetpack_featured_media_url.source_url} />}
                         </a>
                         <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
                     </article>
@@ -52,7 +56,16 @@ export const query = graphql`
         date(formatString: "MMMM Do, YYYY")
         slug
         title
-        jetpack_featured_media_url
+        jetpack_featured_media_url {
+            source_url
+            localFile{
+              childImageSharp{
+                fluid(maxWidth: 500) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+        }
         excerpt
         content
         categories{
