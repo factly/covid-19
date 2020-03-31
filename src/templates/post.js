@@ -44,6 +44,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                         <img src={post.jetpack_featured_media_url.source_url} />}
                         </a>
                         <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
+                        <h2><i>Originally published at </i><u><a href={post.link}>https://factly.in</a></u></h2>
                     </article>
                 </div>
             </div>
@@ -57,6 +58,7 @@ export const query = graphql`
   query($id: String!) {
     wordpressPost(id: {eq: $id}){
         id
+        link
         date(formatString: "MMMM Do, YYYY")
         slug
         title
