@@ -53,7 +53,13 @@ function PostTemplate({ data: { wordpressPost: post } }) {
 }
 
 export default PostTemplate;
-
+// localFile{
+//     childImageSharp{
+//       fluid(maxWidth: 1000) {
+//           ...GatsbyImageSharpFluid_withWebp
+//       }
+//     }
+//   }
 export const query = graphql`
   query($id: String!) {
     wordpressPost(id: {eq: $id}){
@@ -64,13 +70,6 @@ export const query = graphql`
         title
         jetpack_featured_media_url {
             source_url
-            localFile{
-              childImageSharp{
-                fluid(maxWidth: 1000) {
-                    ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
         }
         excerpt
         content

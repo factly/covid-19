@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import * as Icon from 'react-feather';
@@ -99,10 +99,12 @@ const Layout = props => (
               {children}
             </div>
             <footer className="fadeInUp" style={{ animationDelay: '2s' }}>
-              <img
-                src={logo}
-                alt="https://www.covid19india.org | Coronavirus cases live dashboard"
-              />
+              <Link to="/">
+                <img
+                  src={logo}
+                  alt="https://www.covid19india.org | Coronavirus cases live dashboard"
+                />
+              </Link>
               <h5>We stand with everyone fighting on the frontlines</h5>
               <div className="link">
                 <a href="https://github.com/covid19india">covid19india</a>
