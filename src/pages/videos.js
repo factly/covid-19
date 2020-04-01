@@ -38,7 +38,7 @@ export default Videos;
 
 export const query = graphql`
   query {
-    allItems(sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
+    allItems(filter: {snippet:{thumbnails: {standard: {url:{ne: null}}}}}, sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
         totalCount
         edges {
           node {

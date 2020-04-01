@@ -14,7 +14,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allItems(sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
+      allItems(filter: {snippet:{thumbnails: {standard: {url:{ne: null}}}}}, sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
         totalCount
         edges {
           node {
