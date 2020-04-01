@@ -18,7 +18,7 @@ function Stories ({ data }) {
                             {
                                 post.node.jetpack_featured_media_url.localFile ? 
                                     <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                                    <img src={post.node.jetpack_featured_media_url.source_url} />
+                                    <img src={post.node.jetpack_featured_media_url} />
                             }
                         </Link>
                         <div className="title">
@@ -56,9 +56,7 @@ export const query = graphql`
             excerpt
             title
             slug
-            jetpack_featured_media_url {
-                source_url
-            }
+            jetpack_featured_media_url
             date(formatString: "MMMM Do, YYYY")
             author_meta {
                 display_name
