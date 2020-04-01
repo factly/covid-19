@@ -18,7 +18,7 @@ function Stories ({ data }) {
                             {
                                 post.node.jetpack_featured_media_url.localFile ? 
                                     <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                                    <img src={post.node.jetpack_featured_media_url} />
+                                    <img src={post.node.jetpack_featured_media_url.source_url} />
                             }
                         </Link>
                         <div className="title">
@@ -39,13 +39,7 @@ function Stories ({ data }) {
 }
 
 export default Stories;
-// localFile{
-//     childImageSharp{
-//       fluid(maxWidth: 1000) {
-//           ...GatsbyImageSharpFluid_withWebp
-//       }
-//     }
-//   }
+
 export const query = graphql`
   query {
     allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
@@ -56,7 +50,16 @@ export const query = graphql`
             excerpt
             title
             slug
-            jetpack_featured_media_url
+            jetpack_featured_media_url {
+                source_url
+                localFile{
+                  childImageSharp{
+                    fluid(maxWidth: 1000) {
+                        ...GatsbyImageSharpFluid_withWebp
+                    }
+                  }
+                }
+            }
             date(formatString: "MMMM Do, YYYY")
             author_meta {
                 display_name
