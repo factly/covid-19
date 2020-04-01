@@ -39,7 +39,13 @@ function Stories ({ data }) {
 }
 
 export default Stories;
-
+// localFile{
+//     childImageSharp{
+//       fluid(maxWidth: 1000) {
+//           ...GatsbyImageSharpFluid_withWebp
+//       }
+//     }
+//   }
 export const query = graphql`
   query {
     allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
@@ -52,13 +58,6 @@ export const query = graphql`
             slug
             jetpack_featured_media_url {
                 source_url
-                localFile{
-                  childImageSharp{
-                    fluid(maxWidth: 1000) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                  }
-                }
             }
             date(formatString: "MMMM Do, YYYY")
             author_meta {
