@@ -12,7 +12,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
             { name: 'description', content: post.excerpt },
             {
                 property: 'og:image',
-                content: post.jetpack_featured_media_url
+                content: post.jetpack_featured_media_url.source_url
               }
             ]}
         />
@@ -41,7 +41,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                         <Link className="image-link" to={`/stories/${post.slug}`}>
                         { post.jetpack_featured_media_url.localFile ? 
                         <Img fluid={post.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                        <img src={post.jetpack_featured_media_url} />}
+                        <img src={post.jetpack_featured_media_url.source_url} />}
                         </Link>
                         <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
                         <div className="content"><p><i>Originally published at </i><u><a href={post.link}>Factly</a></u></p></div>
@@ -53,13 +53,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
 }
 
 export default PostTemplate;
-// localFile{
-//     childImageSharp{
-//       fluid(maxWidth: 1000) {
-//           ...GatsbyImageSharpFluid_withWebp
-//       }
-//     }
-//   }
+
 export const query = graphql`
   query($id: String!) {
     wordpressPost(id: {eq: $id}){
@@ -68,7 +62,16 @@ export const query = graphql`
         date(formatString: "MMMM Do, YYYY")
         slug
         title
-        jetpack_featured_media_url
+        jetpack_featured_media_url {
+            source_url
+            localFile{
+              childImageSharp{
+                fluid(maxWidth: 1000) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+        }
         excerpt
         content
         categories{
