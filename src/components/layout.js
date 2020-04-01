@@ -18,6 +18,16 @@ const pages = [
     animationDelayForNavbar: 0.2
   },
   {
+    pageLink: '/stories',
+    displayName: 'Stories',
+    animationDelayForNavbar: 0.4
+  },
+  {
+    pageLink: '/videos',
+    displayName: 'Videos',
+    animationDelayForNavbar: 0.4
+  },
+  {
     pageLink: '/clusters',
     displayName: 'Clusters',
     animationDelayForNavbar: 0.3
@@ -30,16 +40,6 @@ const pages = [
   {
     pageLink: '/faq',
     displayName: 'FAQ',
-    animationDelayForNavbar: 0.4
-  },
-  {
-    pageLink: '/stories',
-    displayName: 'Stories',
-    animationDelayForNavbar: 0.4
-  },
-  {
-    pageLink: '/videos',
-    displayName: 'Videos',
     animationDelayForNavbar: 0.4
   }
 ];
