@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 function PostTemplate({ data: { wordpressPost: post } }) {
     return <Layout>
@@ -24,13 +24,13 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                         {/* <span className="cat-title">Coronavirus</span> */}
                         <div className="title">
                             <div  className="sub-title">
-                            <h6><a href="/stories">Stories</a></h6>
+                            <h6><Link to="/stories">Stories</Link></h6>
                             {post.categories.map(function(category){
                                     return <h6>{category.name}</h6>;
                                 })}
                             </div>
                             <h1>
-                                <a href={`/stories/${post.slug}`} dangerouslySetInnerHTML={{__html: post.title}}></a>
+                                <Link to={`/stories/${post.slug}`} dangerouslySetInnerHTML={{__html: post.title}}></Link>
                             </h1>
                         </div>
                         
@@ -38,13 +38,13 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                             <span className="author">By {post.author_meta.display_name}</span>
                             <span className="date"> On {post.date}</span>
                         </div>
-                        <a className="image-link" href={`/stories/${post.slug}`}>
+                        <Link className="image-link" to={`/stories/${post.slug}`}>
                         { post.jetpack_featured_media_url.localFile ? 
                         <Img fluid={post.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
                         <img src={post.jetpack_featured_media_url.source_url} />}
-                        </a>
+                        </Link>
                         <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
-                        <h2><i>Originally published at </i><u><a href={post.link}>https://factly.in</a></u></h2>
+                        <div className="content"><p><i>Originally published at </i><u><a href={post.link}>Factly</a></u></p></div>
                     </article>
                 </div>
             </div>

@@ -36,6 +36,11 @@ const pages = [
     pageLink: '/stories',
     displayName: 'Stories',
     animationDelayForNavbar: 0.4
+  },
+  {
+    pageLink: '/videos',
+    displayName: 'Videos',
+    animationDelayForNavbar: 0.4
   }
 ];
 
