@@ -44,6 +44,50 @@ module.exports = {
         ]
       },
     },
+    // {
+    //   resolve: `gatsby-source-youtube-v2`,
+    //   options: {
+    //     channelId: ["UCpi2S8wW4xLlUCVryhyBtsA"],
+    //     apiKey: 'AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c',
+    //     maxVideos: 50 // Defaults to 50
+    //   },
+    // },
+    {
+      resolve: "gatsby-source-custom-api",
+      options: {
+          url: "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLEQcsVYyf3IBYqmtPuCp2b_6XMdTG52MQ&key=AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c",
+          imageKeys: ["standard"],
+          rootKey: "items",
+          schemas: {
+            items: `
+                  snippet: snippet
+                  contentDetails: contentDetails
+              `,
+              snippet: `
+                channelId: String
+                title: String
+                publishedAt: Date
+                channelTitle: String
+                playlistId: String
+                position: Int
+                thumbnails: thumbnails
+              `,
+              thumbnails:`
+                standard: standard
+              `,
+              standard:`
+                url: String
+                width: Int
+                height: Int
+              `,
+              contentDetails: `
+                videoPublishedAt: Date
+                videoId: String
+              `
+          }
+
+      }
+    },
     '@bumped-inc/gatsby-plugin-optional-chaining',
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',

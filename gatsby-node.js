@@ -3,6 +3,7 @@ const { slash } = require(`gatsby-core-utils`)
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+  
   const result = await graphql(`
     query {
       allWordpressPost(filter: {categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
@@ -10,6 +11,17 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             slug
+          }
+        }
+      }
+      allItems(sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
+        totalCount
+        edges {
+          node {
+            contentDetails {
+              videoId
+              videoPublishedAt(formatString: "MMMM Do, YYYY")
+            }
           }
         }
       }
@@ -28,6 +40,22 @@ exports.createPages = async ({ graphql, actions }) => {
       // as a GraphQL variable to query for this posts's data.
       context: {
         id: edge.node.id,
+      },
+    })
+  })
+  const videoTemplate = path.resolve(`./src/templates/videos.js`)
+
+  result.data.allItems.edges.forEach(edge => {
+    if(!edge.node.contentDetails) return false;
+    createPage({
+      // will be the url for the page
+      path: `/videos/${edge.node.contentDetails.videoId}`,
+      // specify the component template of your choice
+      component: slash(videoTemplate),
+      // In the ^template's GraphQL query, 'id' will be available
+      // as a GraphQL variable to query for this posts's data.
+      context: {
+        id: edge.node.contentDetails.videoId,
       },
     })
   })

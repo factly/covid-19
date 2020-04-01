@@ -15,10 +15,11 @@ function Stories ({ data }) {
                     <article>
                         <span className="cat-title">Coronavirus</span>
                         <Link className="image-link" to={`/stories/${post.node.slug}`}>
-                        {post.node.jetpack_featured_media_url.localFile ? 
-                            <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                            <img src={post.node.jetpack_featured_media_url.source_url} />
-                        }
+                            {
+                                post.node.jetpack_featured_media_url.localFile ? 
+                                    <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
+                                    <img src={post.node.jetpack_featured_media_url.source_url} />
+                            }
                         </Link>
                         <div className="title">
                             <h2>
