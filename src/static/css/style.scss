@@ -262,7 +262,6 @@
         text-decoration: none;
         margin-right: 2rem;
         color: $gray-mid;
-  
         span {
           display: inline-block;
   
@@ -276,7 +275,9 @@
     .focused {
       color: $gray;
     }
-  
+    a{
+      align-self: center;
+    }
     img {
       height: 3rem;
       align-self: center;
@@ -1655,6 +1656,15 @@
       }
       img{
         width: 100%;
+      }
+      blockquote{
+        padding: 1.857em;
+        padding-bottom: 0;
+        border-left: 3px solid #d9d9d9;
+        border-bottom: 1px solid transparent;
+        background: #f2f2f2;
+        border-color: #eee;
+        margin: 0;
       }
     }
   }

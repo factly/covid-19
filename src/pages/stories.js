@@ -1,7 +1,7 @@
 import React from 'react';
 import Img  from 'gatsby-image';
 import Layout from '../components/layout';
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 function Stories ({ data }) {
     return <Layout>
@@ -14,15 +14,15 @@ function Stories ({ data }) {
             {data.allWordpressPost.edges.map(post => <div key={post.node.wordpress_id} className="col col-6">
                     <article>
                         <span className="cat-title">Coronavirus</span>
-                        <a className="image-link" href={`/stories/${post.node.slug}`}>
+                        <Link className="image-link" to={`/stories/${post.node.slug}`}>
                         {post.node.jetpack_featured_media_url.localFile ? 
                             <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
                             <img src={post.node.jetpack_featured_media_url.source_url} />
                         }
-                        </a>
+                        </Link>
                         <div className="title">
                             <h2>
-                                <a href={`/stories/${post.node.slug}`} dangerouslySetInnerHTML={{__html: `${post.node.title}`}}></a>
+                                <Link to={`/stories/${post.node.slug}`} dangerouslySetInnerHTML={{__html: `${post.node.title}`}}></Link>
                             </h2>
                         </div>
                         <div className="meta-info">
@@ -41,7 +41,7 @@ export default Stories;
 
 export const query = graphql`
   query {
-    allWordpressPost(filter: {categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
+    allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
         totalCount
         edges {
           node {

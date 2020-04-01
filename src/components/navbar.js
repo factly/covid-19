@@ -20,16 +20,17 @@ function Navbar(props) {
           transition: 'all 0.3s ease-in-out'
         }}
       >
-        <img
-          className="fadeInUp logo"
-          alt="India COVID-19 Tracker"
-          src={logo}
-          style={{
-            animationDelay: '0.0s',
-            transition: 'all 0.3s ease-in-out'
-          }}
-        />
-
+       <Link to="/"> 
+          <img
+            className="fadeInUp logo"
+            alt="India COVID-19 Tracker"
+            src={logo}
+            style={{
+              animationDelay: '0.0s',
+              transition: 'all 0.3s ease-in-out'
+            }}
+          />
+        </Link>
         <div className="navbar-left">
           {props.pages.map((page, i) => (
             <Link to={page.pageLink} key={i}>
