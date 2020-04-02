@@ -1533,6 +1533,7 @@
   .stories{
     margin-left: 1rem;
     margin-right: 1rem;
+   
     a{
       color: #252525;
       text-decoration: none;
@@ -1559,6 +1560,10 @@
       flex-direction: column;
       padding: 0.5rem;
       position: relative;
+    }
+    .highlight{
+      background: #f1f1f1;
+      border-radius: 4px
     }
     .heading{
       color: #343a40;
@@ -1703,7 +1708,8 @@
     }
     .row{
       .col-4{
-        flex-basis: 33%;
+        flex-basis: 30%;
+        width: 30%;
       }
       .col-6{
         flex-basis: 50%;

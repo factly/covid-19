@@ -23,7 +23,6 @@ export default function HTML(props) {
         {props.postBodyComponents}
         <div id="webchat"/>
         <script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
-        // Or you can replace latest with a specific version
         <script dangerouslySetInnerHTML={{
         __html: `>
               WebChat.default.init({
