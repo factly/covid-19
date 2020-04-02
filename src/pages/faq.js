@@ -36,6 +36,21 @@ function FAQ(props) {
         );
       })}
     </div>
+
+    <div id="webchat"/>
+        <script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
+        // Or you can replace latest with a specific version
+        <script>
+        WebChat.default.init({
+            selector: "#webchat",
+            initPayload: "/get_started",
+            customData: {"language": "en"}, // arbitrary custom data. Stay minimal as this will be added to the socket
+            socketUrl: "https://rasa.factly.in",
+            socketPath: "/socket.io/",
+            title: "Covid-19 Chatbot",
+            subtitle: "Quesions about Covid-19",
+        })
+        </script>
     </Layout>
   );
 }
