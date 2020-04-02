@@ -42,7 +42,7 @@ export default Stories;
 
 export const query = graphql`
   query {
-    allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {localFile : {ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
+    allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {source_url:{ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
         totalCount
         edges {
           node {
