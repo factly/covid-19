@@ -28,6 +28,11 @@ const pages = [
     animationDelayForNavbar: 0.4
   },
   {
+    pageLink: '/infographics',
+    displayName: 'Info Graphics',
+    animationDelayForNavbar: 0.4
+  },
+  {
     pageLink: '/clusters',
     displayName: 'Clusters',
     animationDelayForNavbar: 0.3
