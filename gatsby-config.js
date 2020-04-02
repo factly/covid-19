@@ -44,18 +44,27 @@ module.exports = {
         ]
       },
     },
+    {
+      resolve: '@fs/gatsby-plugin-drive',
+      options: {
+        folderId: process.env.GOOGLE_DRIVE_FOLDER_ID,
+        keyFile: path.resolve(__dirname, 'client_secret.json'),
+        destination: path.join(__dirname, 'src/static/images/drive'),
+        exportGDocs: false,
+      }
+    },
     // {
     //   resolve: `gatsby-source-youtube-v2`,
     //   options: {
     //     channelId: ["UCpi2S8wW4xLlUCVryhyBtsA"],
-    //     apiKey: 'AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c',
+    //     apiKey: process.env.GOOGLE_PRIVATE_KEY,
     //     maxVideos: 50 // Defaults to 50
     //   },
     // },
     {
       resolve: "gatsby-source-custom-api",
       options: {
-          url: "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLEQcsVYyf3IBYqmtPuCp2b_6XMdTG52MQ&key=AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c",
+          url: `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLEQcsVYyf3IBYqmtPuCp2b_6XMdTG52MQ&key=${process.env.GOOGLE_PRIVATE_KEY}`,
           imageKeys: ["standard"],
           rootKey: "items",
           schemas: {
@@ -101,8 +110,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'images',
-        path: path.join(__dirname, `src`, `static/images`)
+        name: 'gallery',
+        path: path.join(__dirname, `src`, `static/images/drive`)
       }
     },
     'gatsby-plugin-sharp',
