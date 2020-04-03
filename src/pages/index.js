@@ -7,13 +7,11 @@ function Index ({ data }) {
     return <Layout>
         <div className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
-            <div className="heading">
-                <h1>BROWSING: Stories</h1>
-            </div>
+            
             <div className="row">   
             {data.allWordpressPost.edges.map(post => <div key={post.node.wordpress_id} className="col col-6">
                     <article>
-                        <span className="cat-title">Coronavirus</span>
+                        <span className="cat-title">{post.node.categories.shift()}</span>
                         <Link className="image-link" to={`/factcheck/${post.node.slug}`}>
                             {
                                 post.node.jetpack_featured_media_url.localFile ? 

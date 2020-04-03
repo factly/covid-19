@@ -1216,9 +1216,10 @@
   footer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5rem;
     justify-content: center;
-    margin-top: 5rem;
+    margin-top: 3rem;
+    background: rgba(32,26,162,.12549);
+    align-items: center;
   
     & > * {
       align-self: center;
