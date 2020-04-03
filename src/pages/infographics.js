@@ -26,7 +26,6 @@ function Infographics({data}){
            height: edge.node.childImageSharp.fluid.presentationHeight
        };
     })
-    console.log('photos', photos)
     return <Layout>
         <div  className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>

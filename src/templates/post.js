@@ -30,7 +30,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                                 })}
                             </div>
                             <h1>
-                                <Link to={`/stories/${post.slug}`} dangerouslySetInnerHTML={{__html: post.title}}></Link>
+                                <Link to={`/factcheck/${post.slug}`} dangerouslySetInnerHTML={{__html: post.title}}></Link>
                             </h1>
                         </div>
                         
@@ -38,11 +38,11 @@ function PostTemplate({ data: { wordpressPost: post } }) {
                             <span className="author">By {post.author_meta.display_name}</span>
                             <span className="date"> On {post.date}</span>
                         </div>
-                        <Link className="image-link" to={`/stories/${post.slug}`}>
-                        { post.jetpack_featured_media_url.localFile ? 
-                        <Img fluid={post.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                        <img src={post.jetpack_featured_media_url.source_url} />}
-                        </Link>
+{/* //                         <Link className="image-link" to={`factcheck${post.slug}`}>
+//                         { post.jetpack_featured_media_url.localFile ? 
+//                         <Img fluid={post.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
+//                         <img src={post.jetpack_featured_media_url.source_url} />}
+//                         </Link> */}
                         <div className="content" dangerouslySetInnerHTML={{ __html: post.content}} />
                         <div className="content"><p><i>Originally published at </i><u><a href={post.link}>Factly</a></u></p></div>
                     </article>
