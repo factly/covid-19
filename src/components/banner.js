@@ -1,71 +1,73 @@
 import React, {useState, useEffect} from 'react';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import axios from 'axios';
+import { Link, graphql, StaticQuery } from 'gatsby';
 
-function Banner(props) {
-  const [snippets, setSnippets] = useState([]);
-  const [snippet, setSnippet] = useState();
-  const startLocalValue = typeof window !== `undefined` ? localStorage.getItem('start') : null;
-  const [start] = useState(
-    props.start
-      ? new Date(props.date)
-      : startLocalValue === 'null'
-      ? new Date()
-      : new Date(startLocalValue)
-  );
-  const [difference, setDifference] = useState(
-    new Date(differenceInMilliseconds(new Date(), start))
-      .toISOString()
-      .slice(11, 19)
-  );
-
-  useEffect(() => {
-    getSnippets();
-  }, [1]);
-
-  useEffect(() => {
-    if (snippets.length > 1) {
-      setSnippet(snippets[0]);
-    }
-  }, [snippets]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDifference(
-        new Date(differenceInMilliseconds(new Date(), start))
+const Banner = () => (
+    <StaticQuery
+    query={graphql`
+      query Banner {
+        allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {source_url:{ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 420}}}}, limit: 10) {
+          totalCount
+          edges {
+            node {
+              wordpress_id
+              title
+              slug
+            }
+          }
+        }
+      }
+    `}
+    render={({allWordpressPost, start, date}) => {
+      const [snippets, setSnippets] = useState(allWordpressPost.edges);
+      const [snippet, setSnippet] = useState();
+      const startStateLocalValue = typeof window !== `undefined` ? localStorage.getItem('startState') : null;
+      const [startState] = useState(
+        start
+          ? new Date(date)
+          : startStateLocalValue === 'null'
+          ? new Date()
+          : new Date(startStateLocalValue)
+      );
+      const [difference, setDifference] = useState(
+        new Date(differenceInMilliseconds(new Date(), startState))
           .toISOString()
           .slice(11, 19)
       );
-    }, 10000);
-    snippetChooser(0, snippets.length - 1);
-    return () => clearInterval(interval);
-  }, [difference]);
 
-  const snippetChooser = (min, max) => {
-    const index = Math.random() * (max - min) + min;
-    setSnippet(snippets[Math.floor(index)]);
-  };
+      useEffect(() => {
+        if (snippets.length > 1) {
+          setSnippet(snippets[0]);
+        }
+      }, [snippets]);
 
-  const getSnippets = () => {
-    axios
-      .get('https://api.covid19india.org/website_data.json')
-      .then((response) => {
-        setSnippets(response.data.factoids);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setDifference(
+            new Date(differenceInMilliseconds(new Date(), startState))
+              .toISOString()
+              .slice(11, 19)
+          );
+        }, 10000);
+        snippetChooser(0, snippets.length - 1);
+        return () => clearInterval(interval);
+      }, [difference]);
 
-  return (
-    <div
-      onClick={() => snippetChooser(0, snippets.length - 1)}
-      className="Banner fadeInUp"
-      style={{animationDelay: '0.2s'}}
-    >
-      <div className="snippet">{snippet ? snippet.banner : ''} &nbsp;</div>
-    </div>
+      const snippetChooser = (min, max) => {
+        const index = Math.random() * (max - min) + min;
+        setSnippet(snippets[Math.floor(index)]);
+      };
+      return (
+        <div
+          className="Banner fadeInUp"
+          style={{animationDelay: '0.2s'}}
+        >
+        {snippet && <div className="snippet"><Link to={`/factcheck/${snippet.node.slug}`}>{snippet.node.title} &nbsp;</Link></div>}
+        </div>
+      )
+    }}
+    ></StaticQuery>
   );
-}
 
 export default Banner;

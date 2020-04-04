@@ -6693,10 +6693,8 @@ gatsby-source-filesystem@^2.0.29, gatsby-source-filesystem@^2.1.40, gatsby-sourc
     valid-url "^1.0.9"
     xstate "^4.8.0"
 
-gatsby-source-wordpress@^3.2.3:
+"gatsby-source-wordpress@file:plugins/gatsby-source-wordpress":
   version "3.2.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-wordpress/-/gatsby-source-wordpress-3.2.3.tgz#50a24f3d76eac0b3d75c822fdf4ebe072f507c99"
-  integrity sha512-fJCnF7B3RNzvbzk9EaFKSdUCz7l3eqfyfznknr+opJBTIFgM5afKYf4+DAv16yslLLzywecvoW6tZX1cPd3F8w==
   dependencies:
     "@babel/runtime" "^7.8.7"
     axios "^0.19.2"

@@ -36,6 +36,20 @@ module.exports = {
         restApiRoutePrefix: "wp-json",
         hostingWPCOM: false,
         useACF: false,
+        queryParams:[
+          {
+            matchRoute: "/posts",
+            query: {
+              categories: "420"
+            }
+          },
+          {
+            matchRoute: "/media",
+            query: {
+              search: "corona,coronavirus"
+            }
+          }
+        ],
         includedRoutes: [
           "**/posts",
           "**/categories",
@@ -132,9 +146,9 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true, // Print removed selectors and processed file names
-        // develop: true, // Enable while using `gatsby develop`
+        develop: true, // Enable while using `gatsby develop`
         // tailwind: true, // Enable tailwindcss support
-        whitelist: ['blockquote'], // Don't remove this selector
+        whitelist: ['blockquote', 'embed-youtube', 'video-wrapper'], // Don't remove this selector
         // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
         // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       }

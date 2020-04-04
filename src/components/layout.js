@@ -14,12 +14,7 @@ import logo from '../static/images/logo/factly_logo_transparent_376x100.png';
 const pages = [
   {
     pageLink: '/',
-    displayName: 'Home',
-    animationDelayForNavbar: 0.2
-  },
-  {
-    pageLink: '/stories',
-    displayName: 'Stories',
+    displayName: 'Factchecks',
     animationDelayForNavbar: 0.4
   },
   {
@@ -29,8 +24,13 @@ const pages = [
   },
   {
     pageLink: '/infographics',
-    displayName: 'Info Graphics',
+    displayName: 'Infographics',
     animationDelayForNavbar: 0.4
+  },
+  {
+    pageLink: '/tracker',
+    displayName: 'Tracker',
+    animationDelayForNavbar: 0.2
   },
   {
     pageLink: '/clusters',
@@ -104,33 +104,15 @@ const Layout = props => (
               {children}
             </div>
             <footer className="fadeInUp" style={{ animationDelay: '2s' }}>
-              <Link to="/">
-                <img
-                  src={logo}
-                  alt="https://www.covid19india.org | Coronavirus cases live dashboard"
-                />
-              </Link>
-              <h5>We stand with everyone fighting on the frontlines</h5>
-              <div className="link">
+              <div className="link d-flex align-items-center justify-content-center">
+                <Link to="/" style={{background: "none"}}>
+                  <img
+                    src={logo}
+                    alt="https://www.covid19india.org | Coronavirus cases live dashboard"
+                  />
+                </Link>
+                <span className="separator"> </span>
                 <a href="https://github.com/covid19india">covid19india</a>
-              </div>
-              <div id="footerButtons">
-                <a
-                  className="button"
-                  href="https://bit.ly/patientdb"
-                  target="_noblank"
-                >
-                  <Icon.Database />
-                  <span>Crowdsourced Patient Database&nbsp;</span>
-                </a>
-                <a
-                  href="https://bit.ly/covid19crowd"
-                  className="button telegram"
-                  target="_noblank"
-                >
-                  <Icon.MessageCircle />
-                  <span>Join Telegram to Collaborate!</span>
-                </a>
               </div>
             </footer>
           </div>

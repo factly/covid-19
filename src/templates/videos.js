@@ -6,9 +6,10 @@ import { graphql, Link } from 'gatsby'
 
 function PostTemplate({ data: { items: video, allItems: {edges} } }) {
     const descriptionIndex = video.snippet.description.indexOf('For the detailed story');
-    useEffect(() => {
-        document.getElementById('div-video-sidebar').scrollTo(0, document.getElementById(video.contentDetails.videoId).offsetTop)
-    }, [])
+    const randomVideosList = edges.sort((a, b) =>( 0.5 - Math.random()));
+    // useEffect(() => {
+    //     document.getElementById('div-video-sidebar').scrollTo(0, document.getElementById(video.contentDetails.videoId).offsetTop)
+    // }, [])
     return <Layout>
         <Helmet
             title={video.title}
@@ -31,8 +32,8 @@ function PostTemplate({ data: { items: video, allItems: {edges} } }) {
                             </div>
                         </div> */}
                         {/* <span className="cat-title">Coronavirus</span> */}
-                        <div className="content">
-                            <iframe width="100%" height={315} src={`https://www.youtube.com/embed/${video.contentDetails.videoId}`} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                        <div className="content video-wrapper">
+                            <iframe src={`https://www.youtube.com/embed/${video.contentDetails.videoId}`} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                         </div>
                         <div className="title">
                             <h1>
@@ -52,12 +53,12 @@ function PostTemplate({ data: { items: video, allItems: {edges} } }) {
                     </article>
                 </div>
                 <div className="col col-4">
-                <   div className="title"><h2>You may also like -</h2></div>
-                    <div id="div-video-sidebar" style={{ height: "630px", overflow: "auto"}}>
-                    {edges.map(edge => edge.node.snippet && 
-                        <article id={edge.node.contentDetails.videoId} key={edge.node.contentDetails.videoId} className={edge.node.contentDetails.videoId === video.contentDetails.videoId && `highlight`}>
+                    <div className="title" style={{paddingTop: "1rem"}}><h2>Recent videos -</h2></div>
+                    <div id="div-video-sidebar">
+                    {randomVideosList.map(edge => edge.node.snippet && 
+                        edge.node.contentDetails.videoId !== video.contentDetails.videoId && <article key={edge.node.contentDetails.videoId}>
                             <Link className="image-link" to={`/videos/${edge.node.contentDetails.videoId}`}>
-                                <Img fluid={edge.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
+                                <Img alt={edge.node.snippet.title} fluid={edge.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
                             </Link>
                             <div className="title">
                             <div className="sub-title">
@@ -79,7 +80,7 @@ export default PostTemplate;
 
 export const query = graphql`
   query($id: String!) {
-    allItems(filter: {snippet:{thumbnails: {standard: {url:{ne: null}}}}}, sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
+    allItems(limit: 20, filter: {snippet:{thumbnails: {standard: {url:{ne: null}}}}}, sort: {fields: contentDetails___videoPublishedAt, order: DESC}) {
         totalCount
         edges {
           node {

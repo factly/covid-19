@@ -1198,7 +1198,7 @@
       font-weight: 900;
       text-decoration: none;
       color: $blue;
-      background: $blue-light;
+      // background: $blue-light;
       transition: background 0.2s ease-in-out;
   
       &:hover {
@@ -1216,9 +1216,10 @@
   footer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5rem;
     justify-content: center;
-    margin-top: 5rem;
+    margin-top: 3rem;
+    background: rgba(32,26,162,.12549);
+    align-items: center;
   
     & > * {
       align-self: center;
@@ -1679,6 +1680,9 @@
       }
     }
   }
+  .d-flex{
+    display: flex;
+  }
   .justify-content-center{
     justify-content: center;
   }
@@ -1719,4 +1723,20 @@
         width: 70%
       }
     }
+  }
+
+  .embed-youtube, .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+  .embed-youtube iframe, .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .separator{
+    margin: 0px 1rem;
   }

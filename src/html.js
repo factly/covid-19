@@ -24,7 +24,7 @@ export default function HTML(props) {
         <div id="webchat"/>
         <script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
         <script dangerouslySetInnerHTML={{
-        __html: `>
+        __html: `
               WebChat.default.init({
                   selector: "#webchat",
                   initPayload: "/get_started",

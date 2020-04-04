@@ -1,153 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { formatDistance } from 'date-fns';
-import { formatDate } from '../utils';
-import Table from '../components/table';
-import Level from '../components/level';
-import MapExplorer from '../components/mapexplorer';
-import TimeSeries from '../components/timeseries';
-import Minigraph from '../components/minigraph';
+import React from 'react';
+import Img  from 'gatsby-image';
 import Layout from '../components/layout';
+import { graphql, Link } from 'gatsby'
 
-function Home(props) {
-  const [states, setStates] = useState([]);
-  const [stateDistrictWiseData, setStateDistrictWiseData] = useState({});
-  const [fetched, setFetched] = useState(false);
-  const [graphOption, setGraphOption] = useState(1);
-  const [lastUpdated, setLastUpdated] = useState('');
-  const [timeseries, setTimeseries] = useState([]);
-  const [deltas, setDeltas] = useState([]);
-  const [timeseriesMode, setTimeseriesMode] = useState(true);
-  const [stateHighlighted, setStateHighlighted] = useState(undefined);
-  const [districtHighlighted, setDistrictHighlighted] = useState(undefined);
-
-  useEffect(() => {
-    if (fetched === false) {
-      getStates();
-    }
-  }, [fetched]);
-
-  const getStates = async () => {
-    try {
-      const [response, stateDistrictWiseResponse] = await Promise.all([
-        axios.get('https://api.covid19india.org/data.json'),
-        axios.get('https://api.covid19india.org/state_district_wise.json')
-      ]);
-      setStates(response.data.statewise);
-      setTimeseries(response.data.cases_time_series);
-      setLastUpdated(response.data.statewise[0].lastupdatedtime);
-      setDeltas(response.data.key_values[0]);
-      setStateDistrictWiseData(stateDistrictWiseResponse.data);
-      setFetched(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onHighlightState = (state, index) => {
-    if (!state && !index) setStateHighlighted(null);
-    else setStateHighlighted({ state, index });
-  };
-  const onHighlightDistrict = (district, state, index) => {
-    if (!state && !index && !district) setDistrictHighlighted(null);
-    else setDistrictHighlighted({ district, state, index });
-  };
-
-  return (
-    <Layout>
-      <div className="Home">
-        <div className="home-left">
-          <div className="header fadeInUp" style={{ animationDelay: '0.5s' }}>
-            <div className="header-mid">
-              <div className="titles">
-                <h1>India COVID-19 Tracker</h1>
-                <h6>A Crowdsourced Initiative</h6>
-              </div>
-              <div className="last-update">
-                <h6>Last Updated</h6>
-                <h3>
-                  {isNaN(Date.parse(formatDate(lastUpdated)))
-                    ? ''
-                    : `${formatDistance(
-                        new Date(formatDate(lastUpdated)),
-                        new Date()
-                      )} Ago`}
-                </h3>
-              </div>
+function Index ({ data }) {
+    return <Layout>
+        <div className="stories fadeInUp"
+            style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
+            <div className="row">   
+            {data.allWordpressPost.edges.map(post => <div key={post.node.wordpress_id} className="col col-6">
+                    <article>
+                        <span className="cat-title">{post.node.categories.shift().name}</span>
+                        <Link className="image-link" to={`/factcheck/${post.node.slug}`}>
+                            {
+                                post.node.jetpack_featured_media_url.localFile ? 
+                                    <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} alt={post.node.title} /> : 
+                                    <img src={post.node.jetpack_featured_media_url.source_url} alt={post.node.title} />
+                            }
+                        </Link>
+                        <div className="title">
+                            <h2>
+                                <Link to={`/factcheck/${post.node.slug}`} dangerouslySetInnerHTML={{__html: `${post.node.title}`}}></Link>
+                            </h2>
+                        </div>
+                        <div className="meta-info">
+                            <span className="author">By {post.node.author_meta.display_name}</span>
+                            <span className="date"> On {post.node.date}</span>
+                        </div>
+                        <div className="excerpt" dangerouslySetInnerHTML={{ __html: `${post.node.excerpt.substring(0,200)}...`}} />
+                    </article>
+                </div>)}
             </div>
-          </div>
-
-          <Level data={states} deltas={deltas} />
-          <Minigraph timeseries={timeseries} animate />
-
-          <Table
-            states={states}
-            summary={false}
-            onHighlightState={onHighlightState}
-            stateDistrictWiseData={stateDistrictWiseData}
-            onHighlightDistrict={onHighlightDistrict}
-          />
         </div>
-
-        <div className="home-right">
-          {fetched && (
-            <React.Fragment>
-              <MapExplorer
-                states={states}
-                stateDistrictWiseData={stateDistrictWiseData}
-                stateHighlighted={stateHighlighted}
-                districtHighlighted={districtHighlighted}
-              />
-
-              <div
-                className="timeseries-header fadeInUp"
-                style={{ animationDelay: '1.5s' }}
-              >
-                <h1>Spread Trends</h1>
-                <div className="tabs">
-                  <div
-                    className={`tab ${graphOption === 1 ? 'focused' : ''}`}
-                    onClick={() => {
-                      setGraphOption(1);
-                    }}
-                  >
-                    <h4>Cumulative</h4>
-                  </div>
-                  <div
-                    className={`tab ${graphOption === 2 ? 'focused' : ''}`}
-                    onClick={() => {
-                      setGraphOption(2);
-                    }}
-                  >
-                    <h4>Daily</h4>
-                  </div>
-                </div>
-
-                <div className="timeseries-mode">
-                  <label htmlFor="timeseries-mode">Scale Uniformly</label>
-                  <input
-                    type="checkbox"
-                    className="switch"
-                    aria-label="Checked by default to scale uniformly."
-                    checked={timeseriesMode}
-                    onChange={event => {
-                      setTimeseriesMode(!timeseriesMode);
-                    }}
-                  />
-                </div>
-              </div>
-
-              <TimeSeries
-                timeseries={timeseries}
-                type={graphOption}
-                mode={timeseriesMode}
-              />
-            </React.Fragment>
-          )}
-        </div>
-      </div>
     </Layout>
-  );
 }
 
-export default Home;
+export default Index;
+
+export const query = graphql`
+  query {
+    allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {source_url:{ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 420}}}}) {
+        totalCount
+        edges {
+          node {
+            wordpress_id
+            excerpt
+            title
+            slug
+            jetpack_featured_media_url {
+                source_url
+                localFile{
+                  childImageSharp{
+                    fluid(maxWidth: 500) {
+                        ...GatsbyImageSharpFluid_withWebp
+                    }
+                  }
+                }
+            }
+            date(formatString: "MMMM Do, YYYY")
+            author_meta {
+                display_name
+            }
+            categories {
+                name
+            }
+          }
+        }
+      }
+  }
+`;
