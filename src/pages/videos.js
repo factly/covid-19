@@ -15,7 +15,7 @@ function Videos ({ data }) {
                     <article>
                         {/* <span className="cat-title">Coronavirus</span> */}
                         <Link className="image-link" to={`/videos/${video.node.contentDetails.videoId}`}>
-                            <Img fluid={video.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
+                            <Img alt={video.node.snippet.title} fluid={video.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
                         </Link>
                         <div className="title">
                             <h2>

@@ -58,7 +58,7 @@ function PostTemplate({ data: { items: video, allItems: {edges} } }) {
                     {randomVideosList.map(edge => edge.node.snippet && 
                         edge.node.contentDetails.videoId !== video.contentDetails.videoId && <article key={edge.node.contentDetails.videoId}>
                             <Link className="image-link" to={`/videos/${edge.node.contentDetails.videoId}`}>
-                                <Img fluid={edge.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
+                                <Img alt={edge.node.snippet.title} fluid={edge.node.snippet.thumbnails.standard.local.childImageSharp.fluid} />
                             </Link>
                             <div className="title">
                             <div className="sub-title">
