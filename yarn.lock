@@ -6654,19 +6654,6 @@ gatsby-source-custom-api@^2.1.4:
     node-fetch "^2.3.0"
     uuid "^3.3.2"
 
-gatsby-source-drive@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-drive/-/gatsby-source-drive-0.0.2.tgz#79fe23271afffbd043021489363778bca83f1c1c"
-  integrity sha512-aX1Gxfpv59Fee3tqs74XcDpPbgNsrQ3F77gCFHH6DXB2r0p797CFyJSWJlsy680yybrw4ox4VO0HrFPmC8aWGQ==
-  dependencies:
-    babel-runtime "^6.26.0"
-    gatsby-source-filesystem "^2.0.17"
-    gtoken "^2.3.2"
-    mkdirp "^0.5.1"
-    node-fetch "^2.3.0"
-    request "^2.87.0"
-    rimraf "^2.6.2"
-
 gatsby-source-filesystem@^1.5.27:
   version "1.5.39"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-1.5.39.tgz#c7e49b7809632b53c827e66ff3ee0ba74ef62dd8"
@@ -6685,7 +6672,7 @@ gatsby-source-filesystem@^1.5.27:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
-gatsby-source-filesystem@^2.0.17, gatsby-source-filesystem@^2.0.29, gatsby-source-filesystem@^2.1.40, gatsby-source-filesystem@^2.2.2:
+gatsby-source-filesystem@^2.0.29, gatsby-source-filesystem@^2.1.40, gatsby-source-filesystem@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.2.2.tgz#9ecbc9e64fedd1c30b4d21f7e148016353b2dc17"
   integrity sha512-uHHCiTp8/q9JF0Yr14Q5aJZ07jUJSV6HJSnrSVnEIF4PfRQkVJG5FHQULmxJUXWQhIoy17EGuzqVjxMsFY69QA==
@@ -6706,10 +6693,8 @@ gatsby-source-filesystem@^2.0.17, gatsby-source-filesystem@^2.0.29, gatsby-sourc
     valid-url "^1.0.9"
     xstate "^4.8.0"
 
-gatsby-source-wordpress@^3.2.3:
+"gatsby-source-wordpress@file:plugins/gatsby-source-wordpress":
   version "3.2.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-wordpress/-/gatsby-source-wordpress-3.2.3.tgz#50a24f3d76eac0b3d75c822fdf4ebe072f507c99"
-  integrity sha512-fJCnF7B3RNzvbzk9EaFKSdUCz7l3eqfyfznknr+opJBTIFgM5afKYf4+DAv16yslLLzywecvoW6tZX1cPd3F8w==
   dependencies:
     "@babel/runtime" "^7.8.7"
     axios "^0.19.2"
@@ -7388,7 +7373,7 @@ graphql@^14.6.0:
   dependencies:
     iterall "^1.2.2"
 
-gtoken@^2.3.0, gtoken@^2.3.2:
+gtoken@^2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/gtoken/-/gtoken-2.3.3.tgz#8a7fe155c5ce0c4b71c886cfb282a9060d94a641"
   integrity sha512-EaB49bu/TCoNeQjhCYKI/CurooBKkGxIqFHsWABW0b25fobBYVTMe84A8EBVVZhl8emiUdNypil9huMOTmyAnw==
