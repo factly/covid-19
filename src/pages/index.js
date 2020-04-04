@@ -14,8 +14,8 @@ function Index ({ data }) {
                         <Link className="image-link" to={`/factcheck/${post.node.slug}`}>
                             {
                                 post.node.jetpack_featured_media_url.localFile ? 
-                                    <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} /> : 
-                                    <img src={post.node.jetpack_featured_media_url.source_url} />
+                                    <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} alt={post.node.title} /> : 
+                                    <img src={post.node.jetpack_featured_media_url.source_url} alt={post.node.title} />
                             }
                         </Link>
                         <div className="title">
