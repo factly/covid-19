@@ -36,6 +36,20 @@ module.exports = {
         restApiRoutePrefix: "wp-json",
         hostingWPCOM: false,
         useACF: false,
+        queryParams:[
+          {
+            matchRoute: "/posts",
+            query: {
+              categories: "420"
+            }
+          },
+          {
+            matchRoute: "/media",
+            query: {
+              search: "corona"
+            }
+          }
+        ],
         includedRoutes: [
           "**/posts",
           "**/categories",
