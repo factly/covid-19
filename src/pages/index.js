@@ -12,11 +12,7 @@ function Index ({ data }) {
                     <article>
                         <span className="cat-title">{post.node.categories.shift().name}</span>
                         <Link className="image-link" to={`/factcheck/${post.node.slug}`}>
-                            {
-                                post.node.jetpack_featured_media_url.localFile ? 
-                                    <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} alt={post.node.title} /> : 
-                                    <img src={post.node.jetpack_featured_media_url.source_url} alt={post.node.title} />
-                            }
+                            <Img fluid={post.node.jetpack_featured_media_url.localFile.childImageSharp.fluid} alt={post.node.title} />
                         </Link>
                         <div className="title">
                             <h2>
@@ -39,7 +35,7 @@ export default Index;
 
 export const query = graphql`
   query {
-    allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {source_url:{ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 358}}}}) {
+    allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 358}}}}) {
         totalCount
         edges {
           node {
@@ -48,7 +44,7 @@ export const query = graphql`
             title
             slug
             jetpack_featured_media_url {
-                source_url
+                featured_img
                 localFile{
                   childImageSharp{
                     fluid(maxWidth: 500) {
