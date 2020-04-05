@@ -60,7 +60,7 @@ export const query = graphql`
             edges {
               node {
                 childImageSharp{
-                  fluid{
+                  fluid(quality: 100){
                     srcSet
                     src
                     sizes

@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import * as Icon from 'react-feather';
-import {formatDate} from '../utils';
+import {formatDate, formatDateAbsolute} from '../utils/';
 import {formatDistance} from 'date-fns';
-
 function Row(props) {
   const [state, setState] = useState(props.state);
   const [districts, setDistricts] = useState(props.districts);
-  const windowInnerWidth = typeof window !== `undefined` ? window.innerWidth : 0;
-
+  const [sortedDistricts, setSortedDistricts] = useState(props.districts);
   const [sortData, setSortData] = useState({
     sortColumn: localStorage.getItem('district.sortColumn')
       ? localStorage.getItem('district.sortColumn')
@@ -17,51 +15,52 @@ function Row(props) {
       : false,
   });
 
-  let sortedDistricts = {};
-
   useEffect(() => {
     setState(props.state);
   }, [props.state]);
 
   useEffect(() => {
     setDistricts(props.districts);
+    setSortedDistricts(props.districts);
   }, [props.districts]);
-
-  useEffect(() => {
-    sort(districts);
-  }, [districts]);
 
   const handleReveal = () => {
     props.handleReveal(props.state.state);
   };
 
-  const sort = (aDistricts) => {
-    sortedDistricts = {};
-    if (aDistricts) {
-      Object.keys(aDistricts)
-        .sort((district1, district2) => {
-          const sortColumn = sortData.sortColumn;
-          const value1 =
-            sortColumn === 'district'
-              ? district1
-              : parseInt(aDistricts[district1].confirmed);
-          const value2 =
-            sortColumn === 'district'
-              ? district2
-              : parseInt(aDistricts[district2].confirmed);
-          const comparisonValue =
-            value1 > value2
-              ? 1
-              : value1 === value2 && district1 > district2
-              ? 1
-              : -1;
-          return sortData.isAscending ? comparisonValue : comparisonValue * -1;
-        })
-        .forEach((key) => {
-          sortedDistricts[key] = aDistricts[key];
-        });
-    }
-  };
+  const sortDistricts = useCallback(
+    (aDistricts) => {
+      const sorted = {};
+      if (aDistricts) {
+        Object.keys(aDistricts)
+          .sort((district1, district2) => {
+            const sortColumn = sortData.sortColumn;
+            const value1 =
+              sortColumn === 'district'
+                ? district1
+                : parseInt(aDistricts[district1].confirmed);
+            const value2 =
+              sortColumn === 'district'
+                ? district2
+                : parseInt(aDistricts[district2].confirmed);
+            const comparisonValue =
+              value1 > value2
+                ? 1
+                : value1 === value2 && district1 > district2
+                ? 1
+                : -1;
+            return sortData.isAscending
+              ? comparisonValue
+              : comparisonValue * -1;
+          })
+          .forEach((key) => {
+            sorted[key] = aDistricts[key];
+          });
+        setSortedDistricts(sorted);
+      }
+    },
+    [sortData.isAscending, sortData.sortColumn]
+  );
 
   const handleSort = (column) => {
     const isAscending =
@@ -76,7 +75,9 @@ function Row(props) {
     localStorage.setItem('district.isAscending', isAscending);
   };
 
-  sort(districts);
+  useEffect(() => {
+    sortDistricts(districts);
+  }, [districts, sortData, sortDistricts]);
 
   return (
     <React.Fragment>
@@ -96,15 +97,14 @@ function Row(props) {
         onMouseEnter={() => props.onHighlightState?.(state, props.index)}
         onMouseLeave={() => props.onHighlightState?.()}
         touchstart={() => props.onHighlightState?.(state, props.index)}
-        onClick={() => {
-          handleReveal();
-        }}
+        onClick={!props.total ? handleReveal : null}
+        style={{background: props.index % 2 === 0 ? '#f8f9fa' : ''}}
       >
         <td style={{fontWeight: 600}}>{state.state}</td>
         <td>
           <span className="deltas" style={{color: '#ff073a'}}>
-            {!state.delta.confirmed == 0 && <Icon.ArrowUp />}
-            {state.delta.confirmed > 0 ? `${state.delta.confirmed}` : ''}
+            {state.deltaconfirmed > 0 && <Icon.ArrowUp />}
+            {state.deltaconfirmed > 0 ? `${state.deltaconfirmed}` : ''}
           </span>
           {parseInt(state.confirmed) === 0 ? '-' : state.confirmed}
         </td>
@@ -122,19 +122,19 @@ function Row(props) {
             color: parseInt(state.recovered) === 0 ? '#B5B5B5' : 'inherit',
           }}
         >
-          {/* <span className="deltas" style={{color: '#28a745'}}>
-            {!state.delta.recovered==0 && <Icon.ArrowUp/>}
-            {state.delta.recovered > 0 ? `${state.delta.recovered}` : ''}
-          </span>*/}
+          <span className="deltas" style={{color: '#28a745'}}>
+            {state.deltarecovered > 0 && <Icon.ArrowUp />}
+            {state.deltarecovered > 0 ? `${state.deltarecovered}` : ''}
+          </span>
           {parseInt(state.recovered) === 0 ? '-' : state.recovered}
         </td>
         <td
           style={{color: parseInt(state.deaths) === 0 ? '#B5B5B5' : 'inherit'}}
         >
-          {/* <span className="deltas" style={{color: '#6c757d'}}>
-            {!state.delta.deaths==0 && <Icon.ArrowUp/>}
-            {state.delta.deaths>0 ? `${state.delta.deaths}` : ''}
-          </span>*/}
+          <span className="deltas" style={{color: '#6c757d'}}>
+            {state.deltadeaths > 0 && <Icon.ArrowUp />}
+            {state.deltadeaths > 0 ? `${state.deltadeaths}` : ''}
+          </span>
           {parseInt(state.deaths) === 0 ? '-' : state.deaths}
         </td>
       </tr>
@@ -143,10 +143,16 @@ function Row(props) {
         className={'state-last-update'}
         style={{display: props.reveal && !props.total ? '' : 'none'}}
       >
-        <td colSpan={5}>
+        <td colSpan={2}>
           <div className="last-update">
             <h6>Last Updated&nbsp;</h6>
-            <h6>
+            <h6
+              title={
+                isNaN(Date.parse(formatDate(props.state.lastupdatedtime)))
+                  ? ''
+                  : formatDateAbsolute(props.state.lastupdatedtime)
+              }
+            >
               {isNaN(Date.parse(formatDate(props.state.lastupdatedtime)))
                 ? ''
                 : `${formatDistance(
@@ -171,18 +177,22 @@ function Row(props) {
                   sortData.sortColumn === 'district' ? 'initial' : 'none',
               }}
             >
-              {sortData.isAscending ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
+              {sortData.isAscending ? (
+                <div className="arrow-up" />
+              ) : (
+                <div className="arrow-down" />
+              )}
             </div>
           </div>
         </td>
         <td onClick={(e) => handleSort('confirmed')}>
           <div className="heading-content">
             <abbr
-              className={`${windowInnerWidth <= 769 ? 'is-cherry' : ''}`}
+              className={`${window.innerWidth <= 769 ? 'is-cherry' : ''}`}
               title="Confirmed"
             >
-              {windowInnerWidth <= 769
-                ? windowInnerWidth <= 375
+              {window.innerWidth <= 769
+                ? window.innerWidth <= 375
                   ? 'C'
                   : 'Cnfmd'
                 : 'Confirmed'}
@@ -193,38 +203,54 @@ function Row(props) {
                   sortData.sortColumn === 'confirmed' ? 'initial' : 'none',
               }}
             >
-              {sortData.isAscending ? <Icon.ArrowUp /> : <Icon.ArrowDown />}
+              {sortData.isAscending ? (
+                <div className="arrow-up" />
+              ) : (
+                <div className="arrow-down" />
+              )}
             </div>
           </div>
         </td>
       </tr>
 
-      {Object.keys(sortedDistricts).map((district, index) => {
-        if (district.toLowerCase() !== 'unknown') {
-          return (
-            <tr
-              key={index}
-              className={`district`}
-              style={{display: props.reveal && !props.total ? '' : 'none'}}
-              onMouseEnter={() =>
-                props.onHighlightDistrict?.(district, state, props.index)
-              }
-              onMouseLeave={() => props.onHighlightDistrict?.()}
-              touchstart={() =>
-                props.onHighlightDistrict?.(district, state, props.index)
-              }
-            >
-              <td style={{fontWeight: 600}}>{district}</td>
-              <td>
-                <span className="deltas" style={{color: '#ff073a'}}>
-                  {!sortedDistricts[district].delta.confirmed == 0 && <Icon.ArrowUp />}
-                  {sortedDistricts[district].delta.confirmed > 0 ? `${sortedDistricts[district].delta.confirmed}` : ''}
-                </span>
-                {sortedDistricts[district].confirmed}</td>
-            </tr>
-          );
-        }
-      })}
+      {sortedDistricts &&
+        Object.keys(sortedDistricts)
+          .filter((district) => district.toLowerCase() !== 'unknown')
+          .map((district, index) => {
+            if (district.toLowerCase() !== 'unknown') {
+              return (
+                <tr
+                  key={index}
+                  className={`district`}
+                  style={{
+                    display: props.reveal && !props.total ? '' : 'none',
+                    background: index % 2 === 0 ? '#f8f9fa' : '',
+                  }}
+                  onMouseEnter={() =>
+                    props.onHighlightDistrict?.(district, state, props.index)
+                  }
+                  onMouseLeave={() => props.onHighlightDistrict?.()}
+                  touchstart={() =>
+                    props.onHighlightDistrict?.(district, state, props.index)
+                  }
+                >
+                  <td style={{fontWeight: 600}}>{district}</td>
+                  <td>
+                    <span className="deltas" style={{color: '#ff073a'}}>
+                      {sortedDistricts[district].delta.confirmed > 0 && (
+                        <Icon.ArrowUp />
+                      )}
+                      {sortedDistricts[district].delta.confirmed > 0
+                        ? `${sortedDistricts[district].delta.confirmed}`
+                        : ''}
+                    </span>
+                    {sortedDistricts[district].confirmed}
+                  </td>
+                </tr>
+              );
+            }
+            return null;
+          })}
 
       {sortedDistricts?.Unknown && (
         <tr
@@ -234,10 +260,15 @@ function Row(props) {
           <td style={{fontWeight: 600}}>Unknown</td>
           <td>
             <span className="deltas" style={{color: '#ff073a'}}>
-              {!sortedDistricts['Unknown'].delta.confirmed == 0 && <Icon.ArrowUp />}
-              {sortedDistricts['Unknown'].delta.confirmed > 0 ? `${sortedDistricts['Unknown'].delta.confirmed}` : ''}
+              {sortedDistricts['Unknown'].delta.confirmed > 0 && (
+                <Icon.ArrowUp />
+              )}
+              {sortedDistricts['Unknown'].delta.confirmed > 0
+                ? `${sortedDistricts['Unknown'].delta.confirmed}`
+                : ''}
             </span>
-            {sortedDistricts['Unknown'].confirmed}</td>
+            {sortedDistricts['Unknown'].confirmed}
+          </td>
         </tr>
       )}
 

@@ -63,7 +63,7 @@ const Banner = () => (
           className="Banner fadeInUp"
           style={{animationDelay: '0.2s'}}
         >
-        {snippet && <div className="snippet"><Link to={`/factcheck/${snippet.node.slug}`}>{snippet.node.title} &nbsp;</Link></div>}
+        {snippet && <div className="snippet"><Link to={`/factcheck/${snippet.node.slug}`} dangerouslySetInnerHTML={{__html: snippet.node.title}}></Link></div>}
         </div>
       )
     }}
