@@ -22,7 +22,7 @@ export default function HTML(props) {
         />
         {props.postBodyComponents}
         <div id="webchat"/>
-        <script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
+        <script src="/js/webchat-latest.js"></script>
         <script dangerouslySetInnerHTML={{
         __html: `
               WebChat.default.init({

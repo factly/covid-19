@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
-
+import {isWindow} from '../utils';
 import logo from '../static/images/logo/factly_logo_transparent_376x100.png';
 
 function Navbar(props) {
   // HTML Properties for each of the links in UI
   const navLinkProps = (path, animationDelay) => ({
-    className: `fadeInUp ${typeof window !== `undefined` && window.location.pathname === path ? 'focused' : ''}`,
+    className: `fadeInUp ${isWindow && window.location.pathname === path ? 'focused' : ''}`,
     style: {
       animationDelay: `${animationDelay}s`
     }
