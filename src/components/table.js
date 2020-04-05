@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'gatsby';
-
+import {isWindow} from '../utils';
 import Row from './row';
 
 function Table(props) {
@@ -8,12 +8,14 @@ function Table(props) {
   const [revealedStates, setRevealedStates] = useState({});
   const [districts, setDistricts] = useState({});
   const [count, setCount] = useState(0);
+  const stateSortColumn = isWindow ? localStorage.getItem('state.sortColumn') : null;
+  const stateIsAscending = isWindow ? localStorage.getItem('state.isAscending') : null;
   const [sortData, setSortData] = useState({
-    sortColumn: localStorage.getItem('state.sortColumn')
-      ? localStorage.getItem('state.sortColumn')
+    sortColumn: stateSortColumn
+      ? stateSortColumn
       : 'confirmed',
-    isAscending: localStorage.getItem('state.isAscending')
-      ? localStorage.getItem('state.isAscending') === 'true'
+    isAscending: stateIsAscending
+      ? stateIsAscending === 'true'
       : false,
   });
 
@@ -88,8 +90,8 @@ function Table(props) {
       sortColumn: currentsortColumn,
       isAscending: isAscending,
     });
-    localStorage.setItem('state.sortColumn', currentsortColumn);
-    localStorage.setItem('state.isAscending', isAscending);
+    isWindow && localStorage.setItem('state.sortColumn', currentsortColumn);
+    isWindow && localStorage.setItem('state.isAscending', isAscending);
   };
 
   const handleReveal = (state) => {

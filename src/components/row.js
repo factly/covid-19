@@ -1,17 +1,19 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import * as Icon from 'react-feather';
-import {formatDate, formatDateAbsolute} from '../utils/';
+import {formatDate, formatDateAbsolute, isWindow} from '../utils/';
 import {formatDistance} from 'date-fns';
 function Row(props) {
   const [state, setState] = useState(props.state);
   const [districts, setDistricts] = useState(props.districts);
   const [sortedDistricts, setSortedDistricts] = useState(props.districts);
+  const districtSortColumn =  isWindow ? localStorage.getItem('district.sortColumn') : null;
+  const districtIsAscending = isWindow ? localStorage.getItem('district.isAscending') : null;
   const [sortData, setSortData] = useState({
-    sortColumn: localStorage.getItem('district.sortColumn')
-      ? localStorage.getItem('district.sortColumn')
+    sortColumn: districtSortColumn
+      ? districtSortColumn
       : 'confirmed',
-    isAscending: localStorage.getItem('district.isAscending')
-      ? localStorage.getItem('district.isAscending') === 'true'
+    isAscending: districtIsAscending
+      ? districtIsAscending === 'true'
       : false,
   });
 
@@ -71,8 +73,8 @@ function Row(props) {
       sortColumn: column,
       isAscending: isAscending,
     });
-    localStorage.setItem('district.sortColumn', column);
-    localStorage.setItem('district.isAscending', isAscending);
+    isWindow && localStorage.setItem('district.sortColumn', column);
+    isWindow && localStorage.setItem('district.isAscending', isAscending);
   };
 
   useEffect(() => {
