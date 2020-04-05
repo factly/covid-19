@@ -64,13 +64,6 @@ export const query = graphql`
         title
         jetpack_featured_media_url {
             source_url
-            localFile{
-              childImageSharp{
-                fluid(maxWidth: 1000) {
-                    ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
         }
         excerpt
         content
