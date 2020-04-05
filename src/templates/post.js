@@ -12,7 +12,7 @@ function PostTemplate({ data: { wordpressPost: post } }) {
             { name: 'description', content: post.excerpt },
             {
                 property: 'og:image',
-                content: post.jetpack_featured_media_url.source_url
+                content: post.jetpack_featured_media_url.featured_img
               }
             ]}
         />
@@ -63,7 +63,7 @@ export const query = graphql`
         slug
         title
         jetpack_featured_media_url {
-            source_url
+            featured_img
         }
         excerpt
         content
