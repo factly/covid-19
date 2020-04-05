@@ -8,6 +8,7 @@ function Row(props) {
   const [sortedDistricts, setSortedDistricts] = useState(props.districts);
   const districtSortColumn =  isWindow ? localStorage.getItem('district.sortColumn') : null;
   const districtIsAscending = isWindow ? localStorage.getItem('district.isAscending') : null;
+  const innerWidth = isWindow && window.innerWidth;
   const [sortData, setSortData] = useState({
     sortColumn: districtSortColumn
       ? districtSortColumn
@@ -190,11 +191,11 @@ function Row(props) {
         <td onClick={(e) => handleSort('confirmed')}>
           <div className="heading-content">
             <abbr
-              className={`${window.innerWidth <= 769 ? 'is-cherry' : ''}`}
+              className={`${innerWidth <= 769 ? 'is-cherry' : ''}`}
               title="Confirmed"
             >
-              {window.innerWidth <= 769
-                ? window.innerWidth <= 375
+              {innerWidth <= 769
+                ? innerWidth <= 375
                   ? 'C'
                   : 'Cnfmd'
                 : 'Confirmed'}

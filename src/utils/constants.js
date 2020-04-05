@@ -4,7 +4,7 @@ export const MAP_TYPES = {
 };
 
 export const MAPS_DIR = '/maps';
-export const isWindow = typeof window != undefined;
+
 export const MAP_META = {
   India: {
     name: 'India',

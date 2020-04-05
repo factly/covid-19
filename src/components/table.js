@@ -10,6 +10,7 @@ function Table(props) {
   const [count, setCount] = useState(0);
   const stateSortColumn = isWindow ? localStorage.getItem('state.sortColumn') : null;
   const stateIsAscending = isWindow ? localStorage.getItem('state.isAscending') : null;
+  const innerWidth = isWindow && window.innerWidth;
   const [sortData, setSortData] = useState({
     sortColumn: stateSortColumn
       ? stateSortColumn
@@ -134,11 +135,11 @@ function Table(props) {
             <th className="sticky" onClick={(e) => handleSort(e, props)}>
               <div className="heading-content">
                 <abbr
-                  className={`${window.innerWidth <= 769 ? 'is-cherry' : ''}`}
+                  className={`${innerWidth <= 769 ? 'is-cherry' : ''}`}
                   title="Confirmed"
                 >
-                  {window.innerWidth <= 769
-                    ? window.innerWidth <= 375
+                  {innerWidth <= 769
+                    ? innerWidth <= 375
                       ? 'C'
                       : 'Cnfmd'
                     : 'Confirmed'}
@@ -160,11 +161,11 @@ function Table(props) {
             <th className="sticky" onClick={(e) => handleSort(e, props)}>
               <div className="heading-content">
                 <abbr
-                  className={`${window.innerWidth <= 769 ? 'is-blue' : ''}`}
+                  className={`${innerWidth <= 769 ? 'is-blue' : ''}`}
                   title="Active"
                 >
-                  {window.innerWidth <= 769
-                    ? window.innerWidth <= 375
+                  {innerWidth <= 769
+                    ? innerWidth <= 375
                       ? 'A'
                       : 'Actv'
                     : 'Active'}
@@ -186,11 +187,11 @@ function Table(props) {
             <th className="sticky" onClick={(e) => handleSort(e, props)}>
               <div className="heading-content">
                 <abbr
-                  className={`${window.innerWidth <= 769 ? 'is-green' : ''}`}
+                  className={`${innerWidth <= 769 ? 'is-green' : ''}`}
                   title="Recovered"
                 >
-                  {window.innerWidth <= 769
-                    ? window.innerWidth <= 375
+                  {innerWidth <= 769
+                    ? innerWidth <= 375
                       ? 'R'
                       : 'Rcvrd'
                     : 'Recovered'}
@@ -217,11 +218,11 @@ function Table(props) {
             <th className="sticky" onClick={(e) => handleSort(e, props)}>
               <div className="heading-content">
                 <abbr
-                  className={`${window.innerWidth <= 769 ? 'is-gray' : ''}`}
+                  className={`${innerWidth <= 769 ? 'is-gray' : ''}`}
                   title="Deaths"
                 >
-                  {window.innerWidth <= 769
-                    ? window.innerWidth <= 375
+                  {innerWidth <= 769
+                    ? innerWidth <= 375
                       ? 'D'
                       : 'Dcsd'
                     : 'Deceased'}

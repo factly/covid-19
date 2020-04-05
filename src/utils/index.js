@@ -12,7 +12,7 @@ const months = {
   '11': 'Nov',
   '12': 'Dec',
 };
-
+export const isWindow = typeof window !== `undefined`;
 export const formatDate = (unformattedDate) => {
   const day = unformattedDate.slice(0, 2);
   const month = unformattedDate.slice(3, 5);

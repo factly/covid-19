@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Patients from './patients';
 import DownloadBlock from './downloadblock';
+import {isWindow} from '../utils';
 
 function filterByObject(obj, filters) {
   const keys = Object.keys(filters);
@@ -30,7 +31,7 @@ function PatientDB(props) {
   const [colorMode, setColorMode] = useState('genders');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    isWindow && window.scrollTo(0, 0);
   }, [pathname]);
 
   useEffect(() => {

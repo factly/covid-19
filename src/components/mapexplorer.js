@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react';
 import ChoroplethMap from './choropleth';
 import {MAP_TYPES, MAPS_DIR, MAP_META as mapMeta} from '../utils/constants';
-import {formatDate, formatDateAbsolute} from '../utils/';
+import {formatDate, formatDateAbsolute, isWindow} from '../utils/';
 import {formatDistance} from 'date-fns';
 
 export default function ({states, stateDistrictWiseData, regionHighlighted}) {
   const [selectedRegion, setSelectedRegion] = useState({});
   const [currentHoveredRegion, setCurrentHoveredRegion] = useState({});
   const [currentMap, setCurrentMap] = useState(mapMeta.India);
-
+  const innerWidth = isWindow && window.innerWidth;
   useEffect(() => {
     const region = getRegionFromState(states[1]);
     setCurrentHoveredRegion(region);
@@ -154,11 +154,11 @@ export default function ({states, stateDistrictWiseData, regionHighlighted}) {
       <div className="header">
         <h1>{currentMap.name}</h1>
         <h6>
-          {window.innerWidth <= 769 ? 'Tap' : 'Hover'} over a{' '}
+          {innerWidth <= 769 ? 'Tap' : 'Hover'} over a{' '}
           {currentMap.mapType === MAP_TYPES.COUNTRY ? 'state/ut' : 'district'}{' '}
           for more details
         </h6>
-        {window.innerWidth <= 769 && (
+        {innerWidth <= 769 && (
           <h6 style={{marginTop: '1rem'}}>
             <span
               style={{
