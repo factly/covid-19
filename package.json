@@ -83,6 +83,7 @@
     "react-feather": "^2.0.3",
     "react-helmet": "^5.2.1",
     "react-images": "^1.1.0",
+    "react-infinite-scroll-hook": "^2.0.1",
     "react-photo-gallery": "^8.0.0",
     "sass-lint": "^1.13.1",
     "topojson": "^3.0.2"
