@@ -350,7 +350,7 @@ exports.searchReplaceContentUrls = function ({
 };
 
 exports.mapEntitiesToMedia = entities => {
-  const media = entities.filter(e => e.__type === `wordpress__wp_media`);
+  const media = entities.filter(e => e.__type === `wordpress__POST`);
   return entities.map(e => {
     // Map featured_media to its media node
     // Check if it's value of ACF Image field, that has 'Return value' set to
@@ -380,13 +380,13 @@ exports.mapEntitiesToMedia = entities => {
           deleteField: true
         };
       } else if (isURL(value) && !isMediaUrlAlreadyProcessed(key)) {
-        const mediaNodeID = getMediaItemID(media.find(m => m.source_url === value));
+        const mediaNodeID = getMediaItemID(media.find(m => m.jetpack_featured_media_url === value));
         return {
           mediaNodeID,
-          deleteField: !!mediaNodeID
+          deleteField: false
         };
       } else if (isPhotoObject(value)) {
-        const mediaNodeID = getMediaItemID(media.find(m => m.source_url === value.url));
+        const mediaNodeID = getMediaItemID(media.find(m => m.jetpack_featured_media_url === value.url));
         return {
           mediaNodeID,
           deleteField: !!mediaNodeID
@@ -463,8 +463,52 @@ exports.downloadMediaFiles = async ({
   keepMediaSizes
 }) => Promise.all(entities.map(async e => {
   let fileNodeID;
+  if(e.__type === `wordpress__POST`){
+    const mediaDataCacheKey = `wordpress-post-media-${e.wordpress_id}`;
+    const cacheMediaData = await cache.get(mediaDataCacheKey); // If we have cached media data and it wasn't modified, reuse
+    // previously created file node to not try to redownload
+    if (cacheMediaData && e.modified === cacheMediaData.modified) {
+      const fileNode = getNode(cacheMediaData.fileNodeID); // check if node still exists in cache
+      // it could be removed if image was made private
 
-  if (e.__type === `wordpress__wp_media`) {
+      if (fileNode) {
+        fileNodeID = cacheMediaData.fileNodeID;
+        touchNode({
+          nodeId: fileNodeID
+        });
+      }
+    } // If we don't have cached data, download the file
+
+
+    if (!fileNodeID) {
+      // WordPress does not properly encode it's media urls
+      const encodedSourceUrl = encodeURI(e.jetpack_featured_media_url);
+
+      try {
+        const fileNode = await createRemoteFileNode({
+          url: encodedSourceUrl,
+          store,
+          cache,
+          createNode,
+          createNodeId,
+          getCache,
+          parentNodeId: e.id,
+          auth: _auth,
+          reporter
+        });
+
+        if (fileNode) {
+          fileNodeID = fileNode.id;
+          await cache.set(mediaDataCacheKey, {
+            fileNodeID,
+            modified: e.modified
+          });
+        }
+      } catch (e) {// Ignore
+      }
+    }
+  }
+  else if (e.__type === `wordpress__wp_media`) {
     const mediaDataCacheKey = `wordpress-media-${e.wordpress_id}`;
     const cacheMediaData = await cache.get(mediaDataCacheKey); // If we have cached media data and it wasn't modified, reuse
     // previously created file node to not try to redownload
@@ -514,7 +558,7 @@ exports.downloadMediaFiles = async ({
   if (fileNodeID) {
     e.localFile___NODE = fileNodeID;
 
-    if (!keepMediaSizes) {
+    if (!keepMediaSizes && e.media_details) {
       delete e.media_details.sizes;
     }
   }

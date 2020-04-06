@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import axios from 'axios';
 import { Link, graphql, StaticQuery } from 'gatsby';
+import { isWindow } from '../utils';
 
 const Banner = () => (
     <StaticQuery
     query={graphql`
       query Banner {
-        allWordpressPost(sort: {fields: date,order:DESC}, filter: {jetpack_featured_media_url: {source_url:{ne: null}}, categories: { elemMatch: {wordpress_id: {eq: 308}}}}, limit: 10) {
+        allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 358}}}}, limit: 10) {
           totalCount
           edges {
             node {
@@ -22,7 +23,7 @@ const Banner = () => (
     render={({allWordpressPost, start, date}) => {
       const [snippets, setSnippets] = useState(allWordpressPost.edges);
       const [snippet, setSnippet] = useState();
-      const startStateLocalValue = typeof window !== `undefined` ? localStorage.getItem('startState') : null;
+      const startStateLocalValue = isWindow ? localStorage.getItem('startState') : null;
       const [startState] = useState(
         start
           ? new Date(date)
@@ -63,7 +64,7 @@ const Banner = () => (
           className="Banner fadeInUp"
           style={{animationDelay: '0.2s'}}
         >
-        {snippet && <div className="snippet"><Link to={`/factcheck/${snippet.node.slug}`}>{snippet.node.title} &nbsp;</Link></div>}
+        {snippet && <div className="snippet"><Link to={`/factcheck/${snippet.node.slug}`} dangerouslySetInnerHTML={{__html: snippet.node.title}}></Link></div>}
         </div>
       )
     }}

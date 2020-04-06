@@ -46,14 +46,14 @@ module.exports = {
           {
             matchRoute: "/media",
             query: {
-              search: "corona,coronavirus"
+              search: "corona"
             }
           }
         ],
         includedRoutes: [
           "**/posts",
           "**/categories",
-          "**/media",
+          // "**/media",
           "**/tags",
         ]
       },
