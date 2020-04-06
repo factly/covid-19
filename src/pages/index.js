@@ -61,7 +61,7 @@ export default Index;
 
 export const query = graphql`
   query {
-    allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 358}}}}) {
+    allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 308}}}}) {
         totalCount
         edges {
           node {

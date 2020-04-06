@@ -8,7 +8,7 @@ const Banner = () => (
     <StaticQuery
     query={graphql`
       query Banner {
-        allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 358}}}}, limit: 10) {
+        allWordpressPost(sort: {fields: date,order:DESC}, filter: {categories: { elemMatch: {wordpress_id: {eq: 308}}}}, limit: 10) {
           totalCount
           edges {
             node {
