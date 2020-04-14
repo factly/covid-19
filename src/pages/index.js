@@ -9,10 +9,8 @@ function Index ({ data }) {
     const [hasNextPage, setHasNextPage] = useState(true);
 
     const handleLoadMore = () => {
-
         if(!hasNextPage) return false;
         const nextPageItems = data.allWordpressPost.edges.slice(items.length, items.length + 6);
-        console.log('handleLoadMore', nextPageItems, hasNextPage, items)
         setItems([...items, ...nextPageItems]);
         setHasNextPage((items.length < data.allWordpressPost.edges.length));
     }

@@ -42,7 +42,6 @@ function Navbar(props) {
             </Link>
           ))}
         </div>
-
         <div className="navbar-right"></div>
       </div>
     );

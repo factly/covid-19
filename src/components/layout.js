@@ -33,11 +33,6 @@ const pages = [
     animationDelayForNavbar: 0.2
   },
   {
-    pageLink: '/clusters',
-    displayName: 'Clusters',
-    animationDelayForNavbar: 0.3
-  },
-  {
     pageLink: '/links',
     displayName: 'Helpful Links',
     animationDelayForNavbar: 0.4
