@@ -1,6 +1,7 @@
 {
   "name": "factly-covid19",
   "version": "1.0.0",
+  "license": "ISC",
   "description": "Covide 19 factly website",
   "repository": {
     "type": "git",
@@ -36,17 +37,6 @@
     ]
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-config-wesbos": "0.0.19",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^3.0.0",
     "prettier": "^2.0.2"
   },
   "dependencies": {
@@ -73,7 +63,6 @@
     "gatsby-source-custom-api": "^2.1.4",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-wordpress": "file:plugins/gatsby-source-wordpress",
-    "gatsby-source-youtube-v2": "^1.0.1",
     "gatsby-transformer-sharp": "^2.3.7",
     "install": "^0.13.0",
     "node-sass": "^4.13.1",

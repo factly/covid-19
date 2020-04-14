@@ -63,7 +63,7 @@ module.exports = {
       options: {
         folderId: process.env.GOOGLE_DRIVE_FOLDER_ID,
         keyFile: path.resolve(__dirname, 'client_secret.json'),
-        destination: path.join(__dirname, 'src/static/images/drive'),
+        destination: path.join(__dirname, '.cache/static/images/drive'),
         exportGDocs: false,
       }
     },
@@ -125,7 +125,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'gallery',
-        path: path.join(__dirname, `src`, `static/images/drive`)
+        path: path.join(__dirname, `.cache/static/images/drive`)
       }
     },
     'gatsby-plugin-sharp',
@@ -142,17 +142,17 @@ module.exports = {
         icon: favicon
       }
     },
-    {
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        printRejected: true, // Print removed selectors and processed file names
-        develop: true, // Enable while using `gatsby develop`
-        // tailwind: true, // Enable tailwindcss support
-        whitelist: ['blockquote', 'embed-youtube', 'video-wrapper'], // Don't remove this selector
-        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-        // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
-      }
-    },
+    // {
+    //   resolve: `gatsby-plugin-purgecss`,
+    //   options: {
+    //     printRejected: true, // Print removed selectors and processed file names
+    //     develop: true, // Enable while using `gatsby develop`
+    //     // tailwind: true, // Enable tailwindcss support
+    //     whitelist: ['blockquote', 'embed-youtube', 'video-wrapper'], // Don't remove this selector
+    //     // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+    //     // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
+    //   }
+    // },
     'gatsby-plugin-offline',
     'gatsby-plugin-sitemap',
     {
