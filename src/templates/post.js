@@ -4,18 +4,50 @@ import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
 import { graphql, Link } from 'gatsby'
 
-function PostTemplate({ data: { wordpressPost: post } }) {
+function PostTemplate({ data: { wordpressPost: post, site: {siteMetadata} } }) {
+    const schemaArticle = {
+        '@context': 'http://schema.org',
+        '@type': 'Article',
+        author: {
+          '@type': 'Person',
+          name: post.author_meta.display_name,
+        },
+        copyrightHolder: {
+          '@type': 'Person',
+          name: post.author_meta.display_name,
+        },
+        copyrightYear: '2020',
+        creator: {
+          '@type': 'Person',
+          name: post.author_meta.display_name,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'factly',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${siteMetadata.siteUrl}/images/favicon.png`,
+          },
+        },
+        datePublished: post.date,
+        description: post.excerpt,
+        headline: post.title,
+        inLanguage: 'telugu',
+        url: siteMetadata.siteUrl,
+        name: post.title,
+        image: {
+          '@type': 'ImageObject',
+          url: post.jetpack_featured_media_url.featured_img,
+        },
+        mainEntityOfPage: siteMetadata.siteUrl,
+      }
     return <Layout>
-        <Helmet
-            title={post.title}
-            meta={[
-            { name: 'description', content: post.excerpt },
-            {
-                property: 'og:image',
-                content: post.jetpack_featured_media_url.featured_img
-              }
-            ]}
-        />
+        <Helmet>
+            <title>{post.title}</title>
+            <meta name="description" content={post.excerpt} />
+            <meta name="image" content={post.jetpack_featured_media_url.featured_img} />
+            <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>
+        </Helmet>
         <div className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
             <div className="row justify-content-center">   
@@ -56,6 +88,17 @@ export default PostTemplate;
 
 export const query = graphql`
   query($id: String!) {
+    site {
+        siteMetadata {
+          description
+          title
+          author
+          type
+          logo
+          favicon
+          siteUrl
+        }
+      }
     wordpressPost(id: {eq: $id}){
         id
         link
