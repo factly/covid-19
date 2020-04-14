@@ -9,7 +9,7 @@ node, npm, gatsby-cli, git, yarn
 ```
 
 ```
-git clone https://github.com/factly/covid-19-english.git
+git clone https://github.com/factly/covid-19.git
 ```
 
 ```
