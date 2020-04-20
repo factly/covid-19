@@ -21,20 +21,13 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <div id="webchat"/>
-        <script src="/js/webchat-latest.js"></script>
-        <script dangerouslySetInnerHTML={{
-        __html: `
-              WebChat.default.init({
-                  selector: "#webchat",
-                  initPayload: "/get_started",
-                  customData: {"language": "en"}, // arbitrary custom data. Stay minimal as this will be added to the socket
-                  socketUrl: "https://rasa.factly.in",
-                  socketPath: "/socket.io/",
-                  title: "Covid-19 Chatbot",
-                  subtitle: "Quesions about Covid-19",
-              })`}}
-        />
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+          intent="WELCOME"
+          chat-title="COVID-19 Help"
+          agent-id="fa6223b7-89e4-4418-90a2-d333e938f932"
+          language-code="en"
+        ></df-messenger>
       </body>
     </html>
   )
