@@ -21,13 +21,6 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-        <df-messenger
-          intent="WELCOME"
-          chat-title="COVID-19 Help"
-          agent-id="fa6223b7-89e4-4418-90a2-d333e938f932"
-          language-code="en"
-        ></df-messenger>
       </body>
     </html>
   )
