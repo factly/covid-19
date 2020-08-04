@@ -23,7 +23,7 @@ function Navbar(props) {
        <Link to="/"> 
           <img
             className="fadeInUp logo"
-            alt="India COVID-19 Tracker"
+            alt="Factly Logo"
             src={logo}
             style={{
               animationDelay: '0.0s',

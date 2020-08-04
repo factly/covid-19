@@ -1320,7 +1320,7 @@
   
     & > * {
       align-self: center;
-      width: 30rem;
+      max-width: 60rem;
       margin-bottom: 1.5rem;
     }
   
@@ -1745,4 +1745,16 @@
   }
   .separator{
     margin: 0px 1rem;
+  }
+  .info-page {
+    li::marker{
+      font-size: 1.75rem;
+    }
+    h3{
+      font-weight: bold;
+    }
+    h2 {
+      font-size:1.75rem !important;
+      margin: 1rem 0;
+    }
   }
