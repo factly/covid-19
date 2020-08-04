@@ -1,11 +1,11 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\mhjad\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-infinite-scroller
+  C:\Program Files\nodejs\node.exe C:\Users\mouryaprasanth\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js remove topojson react-feather
 
 PATH: 
-  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\ProgramData\chocolatey\bin;C:\Users\mhjad\AppData\Local\Microsoft\WindowsApps;C:\Users\mhjad\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\mhjad\AppData\Roaming\npm;C:\Users\mhjad\AppData\Local\GitHubDesktop\bin
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\mouryaprasanth\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Python27;C:\Python27\Scripts;C:\Program Files (x86)\Python37-32\Scripts;C:\Program Files (x86)\Python37-32;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\MongoDB\Server\4.0\bin;C:\Users\mouryaprasanth\AppData\Local\Microsoft\WindowsApps;C:\Users\mouryaprasanth\AppData\Loca;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Java\jre1.8.0_261\bin;C:\Users\mouryaprasanth\AppData\Local\GitHubDesktop\bin;C:\Users\mouryaprasanth\AppData\Roaming\npm;C:\Program Files (x86)\FAHClient
 
 Yarn version: 
-  1.17.0
+  1.22.4
 
 Node version: 
   12.16.1
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'F:\nirlom\covid-19-english\node_modules\node-sass\vendor\win32-x64-72\binding.node'
+  Error: EPERM: operation not permitted, unlink 'E:\factly\covid-19\node_modules\node-sass\vendor\win32-x64-72\binding.node'
 
 npm manifest: 
   {
@@ -74,8 +74,6 @@ npm manifest:
       "@bumped-inc/gatsby-plugin-optional-chaining": "^1.0.0",
       "@fs/gatsby-plugin-drive": "^0.2.1",
       "axios": "^0.19.2",
-      "d3": "^5.15.0",
-      "d3-svg-legend": "^2.25.6",
       "date-fns": "^2.11.0",
       "dotenv": "^8.2.0",
       "gatsby": "^2.18.7",
@@ -99,13 +97,11 @@ npm manifest:
       "prop-types": "^15.7.2",
       "react": "^16.12.0",
       "react-dom": "^16.12.0",
-      "react-feather": "^2.0.3",
       "react-helmet": "^5.2.1",
       "react-images": "^1.1.0",
-      "react-infinite-scroll-hook": "^2.0.1",
+      "react-infinite-scroller": "^1.2.4",
       "react-photo-gallery": "^8.0.0",
-      "sass-lint": "^1.13.1",
-      "topojson": "^3.0.2"
+      "sass-lint": "^1.13.1"
     }
   }
 
@@ -11907,6 +11903,13 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/react-infinite-scroll-hook/-/react-infinite-scroll-hook-2.0.1.tgz#9aff0f7d836f501591a5a92729026ad301eb690d"
     integrity sha512-gKeqcnT9L2vwWQvUxQGaPc5UpS8NFw7ixV81avur5Vu44kqm3fhlZkie0t6bvaoM3ODxpjA0kx+zwHTGTTUmrQ==
+  
+  react-infinite-scroller@^1.2.4:
+    version "1.2.4"
+    resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.2.4.tgz#f67eaec4940a4ce6417bebdd6e3433bfc38826e9"
+    integrity sha512-/oOa0QhZjXPqaD6sictN2edFMsd3kkMiE19Vcz5JDgHpzEJVqYcmq+V3mkwO88087kvKGe1URNksHEOt839Ubw==
+    dependencies:
+      prop-types "^15.5.8"
   
   react-is@^16.7.0, react-is@^16.8.1:
     version "16.13.1"

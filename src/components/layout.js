@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, StaticQuery, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import * as Icon from 'react-feather';
 
 import '../static/css/style.scss';
 
@@ -26,11 +25,6 @@ const pages = [
     pageLink: '/infographics',
     displayName: 'Infographics',
     animationDelayForNavbar: 0.4
-  },
-  {
-    pageLink: '/tracker',
-    displayName: 'Tracker',
-    animationDelayForNavbar: 0.2
   },
   {
     pageLink: '/links',
