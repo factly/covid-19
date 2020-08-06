@@ -37,14 +37,15 @@ function FAQ(props) {
             <a href="https://covid19.telangana.gov.in/wp-content/uploads/2020/03/coronavirus-telugu-faq.pdf">https://covid19.telangana.gov.in/wp-content/uploads/2020/03/coronavirus-telugu-faq.pdf</a>
           </li>
           <li><h2>అవగాహనా గీతాలు/ వీడియోలు</h2>
-
-            <p>అపర సైనికులకు వందనాలు (నిడివి 3:53 ని.లు)<br/><a href="https://www.youtube.com/watch?v=YzbauUD9pNc">https://www.youtube.com/watch?v=YzbauUD9pNc</a></p>
-            <p>ఆందోళన వద్దు...అప్రమత్తమవ్వండి (నిడివి 2:57 ని.లు)<br/><a href="https://www.youtube.com/watch?v=7yvxHV2ecCI">https://www.youtube.com/watch?v=7yvxHV2ecCI</a></p>
-            <p>కరోనాపై అవగాహనకై చిందు యక్షగానం (నిడివి 2:15 ని.లు)<br/><a href="https://www.youtube.com/watch?v=Gm5cYKw9gNs">https://www.youtube.com/watch?v=Gm5cYKw9gNs</a></p>
-            <p>కరోనాపై అవగాహనకై హరికథా గానం (నిడివి 3:15 ని.లు)<br/><a href="https://www.youtube.com/watch?v=ixVjyNB__J4">https://www.youtube.com/watch?v=ixVjyNB__J4</a></p>
-            <p>కరోనాపై అవగాహనకై తత్వాలు (నిడివి 0:56 ని.లు)<br/><a href="https://www.youtube.com/watch?v=bFeBhVKqscI">https://www.youtube.com/watch?v=bFeBhVKqscI</a></p>
-            <p>కరోనా సోకకుండా ముందుజాగ్రత్తలు (నిడివి 1:30 ని.లు)<br/><a href="https://www.youtube.com/watch?v=5KK62993En0">https://www.youtube.com/watch?v=5KK62993En0</a></p>
-            <p>అప్రమత్తమై మేలుకోరో... ఆరోగ్య సూత్రాలు తెలుసుకోరో..(నిడివి 3:53 ని.లు)<br/><a href="https://www.youtube.com/watch?v=W4Q4bh-bFNE">https://www.youtube.com/watch?v=W4Q4bh-bFNE</a></p>
+            <ul>
+              <li> <p>అపర సైనికులకు వందనాలు (నిడివి 3:53 ని.లు)<br/><a href="https://www.youtube.com/watch?v=YzbauUD9pNc">https://www.youtube.com/watch?v=YzbauUD9pNc</a></p></li>
+              <li> <p>ఆందోళన వద్దు...అప్రమత్తమవ్వండి (నిడివి 2:57 ని.లు)<br/><a href="https://www.youtube.com/watch?v=7yvxHV2ecCI">https://www.youtube.com/watch?v=7yvxHV2ecCI</a></p></li>
+              <li> <p>కరోనాపై అవగాహనకై చిందు యక్షగానం (నిడివి 2:15 ని.లు)<br/><a href="https://www.youtube.com/watch?v=Gm5cYKw9gNs">https://www.youtube.com/watch?v=Gm5cYKw9gNs</a></p></li>
+              <li> <p>కరోనాపై అవగాహనకై హరికథా గానం (నిడివి 3:15 ని.లు)<br/><a href="https://www.youtube.com/watch?v=ixVjyNB__J4">https://www.youtube.com/watch?v=ixVjyNB__J4</a></p></li>
+              <li> <p>కరోనాపై అవగాహనకై తత్వాలు (నిడివి 0:56 ని.లు)<br/><a href="https://www.youtube.com/watch?v=bFeBhVKqscI">https://www.youtube.com/watch?v=bFeBhVKqscI</a></p></li>
+              <li>  <p>కరోనా సోకకుండా ముందుజాగ్రత్తలు (నిడివి 1:30 ని.లు)<br/><a href="https://www.youtube.com/watch?v=5KK62993En0">https://www.youtube.com/watch?v=5KK62993En0</a></p></li>
+              <li> <p>అప్రమత్తమై మేలుకోరో... ఆరోగ్య సూత్రాలు తెలుసుకోరో..(నిడివి 3:53 ని.లు)<br/><a href="https://www.youtube.com/watch?v=W4Q4bh-bFNE">https://www.youtube.com/watch?v=W4Q4bh-bFNE</a></p></li>
+            </ul>
           </li>
 
           <li><h2>హెల్ప్‌లైన్, కంట్రోల్  రూమ్ నంబర్లు & క్యాంటీన్స్ జాబితా</h2>
