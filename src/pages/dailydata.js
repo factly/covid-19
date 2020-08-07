@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Carousel, { Modal, ModalGateway } from "react-images";
 
-function QuickCheck({data}){
+function DailyData({data}){
     const [currentImage, setCurrentImage] = useState(0);
     const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
@@ -30,7 +30,7 @@ function QuickCheck({data}){
         <div  className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
             <div className="heading">
-                <h1>BROWSING: Quick Check</h1>
+                <h1>BROWSING: Daily Data</h1>
             </div>
         <Gallery photos={photos} onClick={openLightbox} />
         <ModalGateway>
@@ -51,11 +51,11 @@ function QuickCheck({data}){
     </Layout>;
 }
 
-export default QuickCheck;
+export default DailyData;
 
 export const query = graphql`
     query{
-        allFile(filter: {dir: {regex: "/images/drive/quickcheck/"}}) {
+        allFile(filter: {dir: {regex: "/images/drive/dailydata/"}}) {
             totalCount
             edges {
               node {
