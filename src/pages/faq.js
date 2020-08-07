@@ -72,11 +72,6 @@ function FAQ(props) {
               <li>కోవిద్ 19 రోగులు ఇంట్లోనే ఉండుటకు మార్గదర్శకాలు <a href="https://covid19.telangana.gov.in/wp-content/uploads/2020/06/COVID-19-Guidelines-Manual-Telugu-Version.pdf">https://covid19.telangana.gov.in/wp-content/uploads/2020/06/COVID-19-Guidelines-Manual-Telugu-Version.pdf</a></li>
             </ul>
           </li>
-          <li><h2>కరోనా వైరస్ కి సంబందించిన తాజా నకిలీ వార్తలు</h2>
-            <a href="https://factly.in/category/fake-news-coronavirus/">https://factly.in/category/fake-news-coronavirus/
-
-</a><a href="https://factcheck.telangana.gov.in/">https://factcheck.telangana.gov.in/</a>
-          </li>
         </ol>
 
       </div>

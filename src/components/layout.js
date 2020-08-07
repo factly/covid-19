@@ -22,8 +22,8 @@ const pages = [
     animationDelayForNavbar: 0.4
   },
   {
-    pageLink: '/infographics',
-    displayName: 'Infographics',
+    pageLink: '/quickcheck',
+    displayName: 'Quick Check',
     animationDelayForNavbar: 0.4
   },
   {
