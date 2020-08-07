@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Carousel, { Modal, ModalGateway } from "react-images";
 
-function Infographics({data}){
+function QuickCheck({data}){
     const [currentImage, setCurrentImage] = useState(0);
     const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
@@ -30,7 +30,7 @@ function Infographics({data}){
         <div  className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
             <div className="heading">
-                <h1>BROWSING: Infographics</h1>
+                <h1>BROWSING: Quick Check</h1>
             </div>
         <Gallery photos={photos} onClick={openLightbox} />
         <ModalGateway>
@@ -51,7 +51,7 @@ function Infographics({data}){
     </Layout>;
 }
 
-export default Infographics;
+export default QuickCheck;
 
 export const query = graphql`
     query{

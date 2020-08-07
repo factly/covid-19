@@ -22,18 +22,13 @@ const pages = [
     animationDelayForNavbar: 0.4
   },
   {
-    pageLink: '/infographics',
-    displayName: 'Infographics',
+    pageLink: '/quickcheck',
+    displayName: 'Quick Check',
     animationDelayForNavbar: 0.4
   },
   {
     pageLink: '/links',
     displayName: 'Helpful Links',
-    animationDelayForNavbar: 0.4
-  },
-  {
-    pageLink: '/faq',
-    displayName: 'FAQ',
     animationDelayForNavbar: 0.4
   }
 ];
