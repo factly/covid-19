@@ -27,6 +27,11 @@ const pages = [
     animationDelayForNavbar: 0.4
   },
   {
+    pageLink: '/dailydata',
+    displayName: 'Daily Data',
+    animationDelayForNavbar: 0.4
+  },
+  {
     pageLink: '/links',
     displayName: 'Helpful Links',
     animationDelayForNavbar: 0.4

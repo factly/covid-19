@@ -63,7 +63,16 @@ module.exports = {
       options: {
         folderId: process.env.GOOGLE_DRIVE_FOLDER_ID,
         keyFile: path.resolve(__dirname, 'client_secret.json'),
-        destination: path.join(__dirname, '.cache/static/images/drive'),
+        destination: path.join(__dirname, 'src/static/images/drive/quickcheck'),
+        exportGDocs: false,
+      }
+    },
+    {
+      resolve: '@fs/gatsby-plugin-drive',
+      options: {
+        folderId: process.env.DAILY_DATA_GOOGLE_DRIVE_FOLDER_ID,
+        keyFile: path.resolve(__dirname, 'client_secret.json'),
+        destination: path.join(__dirname, 'src/static/images/drive/dailydata'),
         exportGDocs: false,
       }
     },
@@ -125,7 +134,14 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'gallery',
-        path: path.join(__dirname, `.cache/static/images/drive`)
+        path: path.join(__dirname, `src/static/images/drive/quickcheck`)
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'dailydata',
+        path: path.join(__dirname, `src/static/images/drive/dailydata`)
       }
     },
     'gatsby-plugin-sharp',
