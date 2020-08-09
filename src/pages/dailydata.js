@@ -18,19 +18,19 @@ function DailyData({data}){
         setViewerIsOpen(false);
     };
 
-    const photos = data.allFile.edges.map(edge => {
-        if(!edge.node.childImageSharp.fluid) return false;
+    const photos = data.allDriveNode.edges.map(edge => {
+        if(!edge.node.localFile.childImageSharp.fluid) return false;
        return {
-           ...edge.node.childImageSharp.fluid,
-           width: edge.node.childImageSharp.fluid.presentationWidth,
-           height: edge.node.childImageSharp.fluid.presentationHeight
+           ...edge.node.localFile.childImageSharp.fluid,
+           width: edge.node.localFile.childImageSharp.fluid.presentationWidth,
+           height: edge.node.localFile.childImageSharp.fluid.presentationHeight
        };
     })
     return <Layout>
         <div  className="stories fadeInUp"
             style={{animationDelay: `${0.5 + 1 * 0.1}s`}}>
             <div className="heading">
-                <h1>BROWSING: DailyData</h1>
+                <h1>BROWSING: Daily Data</h1>
             </div>
         <Gallery photos={photos} onClick={openLightbox} />
         <ModalGateway>
@@ -54,23 +54,25 @@ function DailyData({data}){
 export default DailyData;
 
 export const query = graphql`
-    query{
-        allFile(filter: {dir: {regex: "/images/drive/dailydata/"}}) {
-            totalCount
-            edges {
-              node {
-                childImageSharp{
-                  fluid(quality: 100){
-                    srcSet
-                    src
-                    sizes
-                    presentationWidth
-                    presentationHeight
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
+    query {
+      allDriveNode(sort: {fields: createdTime, order: DESC}) {
+        edges {
+          node {
+            id
+            localFile {
+              childImageSharp{
+                fluid(quality: 100){
+                  srcSet
+                  src
+                  sizes
+                  presentationWidth
+                  presentationHeight
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
+          }
         }
+      }
     }
 `;
