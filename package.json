@@ -69,6 +69,7 @@
     "gatsby-plugin-sharp": "^2.3.5",
     "gatsby-plugin-sitemap": "^2.2.22",
     "gatsby-source-custom-api": "^2.1.4",
+    "gatsby-source-drive": "^0.0.2",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-wordpress": "file:plugins/gatsby-source-wordpress",
     "gatsby-source-youtube-v2": "^1.0.1",

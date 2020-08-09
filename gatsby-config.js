@@ -53,11 +53,11 @@ module.exports = {
         includedRoutes: [
           "**/posts",
           "**/categories",
-          // "**/media",
+          "**/media",
           "**/tags",
         ]
       },
-    },
+    }, 
     {
       resolve: '@fs/gatsby-plugin-drive',
       options: {
@@ -66,14 +66,13 @@ module.exports = {
         destination: path.join(__dirname, 'src/static/images/drive/quickcheck'),
         exportGDocs: false,
       }
-    },
+    }, 
     {
-      resolve: '@fs/gatsby-plugin-drive',
+      resolve: 'gatsby-source-drive',
       options: {
         folderId: process.env.DAILY_DATA_GOOGLE_DRIVE_FOLDER_ID,
-        keyFile: path.resolve(__dirname, 'client_secret.json'),
-        destination: path.join(__dirname, 'src/static/images/drive/dailydata'),
-        exportGDocs: false,
+        key: process.env.GOOGLE_CONFIG_PRIVATE_KEY,
+        serviceAccountEmail: process.env.GOOGLE_CLIENT_EMAIL
       }
     },
     // {
@@ -130,20 +129,13 @@ module.exports = {
         head: true
       }
     },
-    {
+     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'gallery',
         path: path.join(__dirname, `src`, `static/images/drive/quickcheck`)
       }
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'dailydata',
-        path: path.join(__dirname, `src`, `static/images/drive/dailydata`)
-      }
-    },
+    }, 
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
