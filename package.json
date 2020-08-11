@@ -63,6 +63,7 @@
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-wordpress": "file:plugins/gatsby-source-wordpress",
     "gatsby-transformer-sharp": "^2.3.7",
+    "gtoken": "^5.0.3",
     "install": "^0.13.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
