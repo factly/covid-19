@@ -8,7 +8,7 @@ import '../static/css/style.scss';
 import Navbar from './navbar';
 import Banner from './banner';
 
-import logo from '../static/images/logo/factly_logo_transparent_376x100.png';
+import logo from '../static/images/logo/factly-logo.png';
 
 const pages = [
   {

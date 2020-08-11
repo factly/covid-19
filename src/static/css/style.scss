@@ -285,7 +285,7 @@
       align-self: center;
     }
     img {
-      height: 3rem;
+      height: 4rem;
       align-self: center;
       margin-left: 5rem;
       cursor: pointer;
@@ -1189,6 +1189,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    h3 span {
+      font-size: 0.6rem;
+    }
   }
   
   .link {
@@ -1389,7 +1392,7 @@
       }
   
       img {
-        height: 1rem;
+        height: 2rem;
         margin-left: 1rem;
         margin-right: -1rem;
         cursor: pointer;

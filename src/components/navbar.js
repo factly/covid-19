@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import {isWindow} from '../utils';
-import logo from '../static/images/logo/factly_logo_transparent_376x100.png';
+import logo from '../static/images/logo/factly-logo.png';
 
 function Navbar(props) {
   // HTML Properties for each of the links in UI
