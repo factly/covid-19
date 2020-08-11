@@ -8,27 +8,27 @@ import '../static/css/style.scss';
 import Navbar from './navbar';
 import Banner from './banner';
 
-import logo from '../static/images/logo/factly_logo_transparent_376x100.png';
+import logo from '../static/images/logo/factly-logo.png';
 
 const pages = [
   {
     pageLink: '/',
-    displayName: 'Factchecks',
+    displayName: 'ఫాక్ట్ చెక్స్',
     animationDelayForNavbar: 0.4
   },
   {
     pageLink: '/videos',
-    displayName: 'Videos',
+    displayName: 'వీడియోలు',
     animationDelayForNavbar: 0.4
   },
   {
     pageLink: '/quickcheck',
-    displayName: 'Quick Check',
+    displayName: 'క్విక్ చెక్',
     animationDelayForNavbar: 0.4
   },
   {
     pageLink: '/dailydata',
-    displayName: 'Daily Data',
+    displayName: 'డైలీ డేటా',
     animationDelayForNavbar: 0.4
   },
   {
