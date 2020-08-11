@@ -74,6 +74,7 @@
     "gatsby-source-wordpress": "file:plugins/gatsby-source-wordpress",
     "gatsby-source-youtube-v2": "^1.0.1",
     "gatsby-transformer-sharp": "^2.3.7",
+    "gtoken": "^5.0.3",
     "install": "^0.13.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
