@@ -68,7 +68,7 @@ module.exports = {
       }
     }, 
     {
-      resolve: 'gatsby-source-drive',
+      resolve: 'gatsby-source-google-drive',
       options: {
         folderId: process.env.DAILY_DATA_GOOGLE_DRIVE_FOLDER_ID,
         key: process.env.GOOGLE_CONFIG_PRIVATE_KEY,
