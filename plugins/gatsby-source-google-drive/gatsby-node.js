@@ -28,16 +28,20 @@ exports.sourceNodes = async ({
   const key = configOptions.key.replace(/\\n/g, '\n');
 
   // Get token and fetch root folder.
-  const {
-    access_token: token
-  } = await googleapi.getToken(key, serviceAccountEmail);
+  let token = await googleapi.getToken(key, serviceAccountEmail);
+  if (typeof token === 'string') {
+    return
+  } else {
+    token = token.access_token;
+  }
+
   const cmsFiles = await googleapi.getFolder(folderId, token);
   for (const file of cmsFiles) {
 
     if (file.mimeType !== FOLDER) {
 
       const nodeId = createNodeId(`drive-file-${file.id}`);
-      
+
       const resp = await googleapi.getFileData(file.id, token);
       const fileData = await googleapi.getFile(file.id, token);
       const nodeContent = JSON.stringify(file);
@@ -57,7 +61,7 @@ exports.sourceNodes = async ({
           type: `DriveNode`,
           mediaType: file.mimeType,
           content: nodeContent,
-          contentDigest:createContentDigest(file)
+          contentDigest: createContentDigest(file)
         },
         name: file.name
       });
