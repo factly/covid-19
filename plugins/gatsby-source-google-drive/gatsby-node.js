@@ -1,7 +1,5 @@
 const googleapi = require(`./googleapis`);
-const fetch = require(`node-fetch`);
-const crypto = require(`crypto`);
-const path = require(`path`);
+
 const {
   createFileNodeFromBuffer
 } = require("gatsby-source-filesystem");
@@ -9,13 +7,14 @@ const {
 const FOLDER = `application/vnd.google-apps.folder`;
 
 exports.sourceNodes = async ({
-  actions,
+  actions: {
+    createNode
+  },
   createNodeId,
-  createContentDigest
+  createContentDigest,
+  reporter
 }, configOptions) => {
-  const {
-    createNode,
-  } = actions;
+
   // Gatsby adds a configOption that's not needed for this plugin, delete it
   delete configOptions.plugins;
   const {
@@ -28,12 +27,9 @@ exports.sourceNodes = async ({
   const key = configOptions.key.replace(/\\n/g, '\n');
 
   // Get token and fetch root folder.
-  let token = await googleapi.getToken(key, serviceAccountEmail);
-  if (typeof token === 'string') {
-    return
-  } else {
-    token = token.access_token;
-  }
+  const {
+    access_token: token
+  } = await googleapi.getToken(key, serviceAccountEmail);
 
   const cmsFiles = await googleapi.getFolder(folderId, token);
   for (const file of cmsFiles) {
@@ -46,16 +42,14 @@ exports.sourceNodes = async ({
       const fileData = await googleapi.getFile(file.id, token);
       const nodeContent = JSON.stringify(file);
       const {
-        webContentLink,
         createdTime
       } = JSON.parse(resp);
-      console.log('downloaded ' + file.name)
-      const node = Object.assign({}, file, {
+      console.log('Downloaded ' + file.name)
+      const node = {
         id: nodeId,
         parent: `__SOURCE__`,
         children: [],
         value: fileData.toString('base64'),
-        url: webContentLink.split('&')[0],
         createdTime,
         internal: {
           type: `DriveNode`,
@@ -64,8 +58,11 @@ exports.sourceNodes = async ({
           contentDigest: createContentDigest(file)
         },
         name: file.name
+      };
+      createNode({
+        ...node,
+        ...file
       });
-      createNode(node);
     }
   }
   return
@@ -74,14 +71,14 @@ exports.sourceNodes = async ({
 exports.onCreateNode = async function ({
   node,
   cache,
-  actions,
-  store,
-  createNodeId
-}) {
-  const {
+  actions: {
     createNode,
     createNodeField
-  } = actions;
+  },
+  store,
+  reporter,
+  createNodeId
+}) {
 
   if (node.internal.type === `DriveNode`) {
 
@@ -97,6 +94,8 @@ exports.onCreateNode = async function ({
       const fileNode = await createFileNodeFromBuffer({
         buffer: buf,
         cache,
+        parentNodeId: node.id,
+        reporter,
         createNode,
         createNodeId,
         store
@@ -112,6 +111,7 @@ exports.onCreateNode = async function ({
       }
 
     } catch (e) {
+      reporter.error(e);
       console.log(`Error creating remote file`, e);
     }
   }
