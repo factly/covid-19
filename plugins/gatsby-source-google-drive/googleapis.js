@@ -40,14 +40,14 @@ const getFolder = (folderId, token) => {
 };
 const getFile = (fileId, token) => {
   return new Promise((resolve, reject) => {
-    requestFile(resolve, reject, fileId, token, 1100);
+    requestFile(resolve, reject, fileId, token, 500);
   });
 };
 
 const getFileData = (fileId, token) => {
   return new Promise((resolve, reject) => {
     request({
-      uri: `https://www.googleapis.com/drive/v3/files/${fileId}?fields=webContentLink%2C%20createdTime`,
+      uri: `https://www.googleapis.com/drive/v3/files/${fileId}?fields=createdTime`,
       auth: {
         bearer: token
       },
