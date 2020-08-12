@@ -46,6 +46,7 @@ const Layout = props => (
           siteMetadata {
             description
             title
+            lang
             author
             type
             logo
