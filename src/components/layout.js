@@ -50,6 +50,7 @@ const Layout = props => (
         site {
           siteMetadata {
             description
+            lang
             title
             author
             type

@@ -12,6 +12,7 @@ const {
   logo,
   author,
   type,
+  lang,
   googleAnalyticsID,
   favicon
 } = require('./data/site-config');
@@ -22,12 +23,13 @@ module.exports = {
     description,
     author,
     siteUrl,
+    lang,
     logo,
+    lang,
     type,
     favicon
   },
-  plugins: [
-    {
+  plugins: [{
       resolve: "gatsby-source-wordpress",
       options: {
         baseUrl: "factly.in",
@@ -36,8 +38,7 @@ module.exports = {
         restApiRoutePrefix: "wp-json",
         hostingWPCOM: false,
         useACF: false,
-        queryParams:[
-          {
+        queryParams: [{
             matchRoute: "/posts",
             query: {
               categories: "420"
@@ -86,15 +87,15 @@ module.exports = {
     {
       resolve: "gatsby-source-custom-api",
       options: {
-          url: `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLEQcsVYyf3IBYqmtPuCp2b_6XMdTG52MQ&key=${process.env.GOOGLE_PRIVATE_KEY}`,
-          imageKeys: ["standard"],
-          rootKey: "items",
-          schemas: {
-            items: `
+        url: `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLEQcsVYyf3IBYqmtPuCp2b_6XMdTG52MQ&key=${process.env.GOOGLE_PRIVATE_KEY}`,
+        imageKeys: ["standard"],
+        rootKey: "items",
+        schemas: {
+          items: `
                   snippet: snippet
                   contentDetails: contentDetails
               `,
-              snippet: `
+          snippet: `
                 channelId: String
                 title: String
                 publishedAt: Date
@@ -103,19 +104,19 @@ module.exports = {
                 position: Int
                 thumbnails: thumbnails
               `,
-              thumbnails:`
+          thumbnails: `
                 standard: standard
               `,
-              standard:`
+          standard: `
                 url: String
                 width: Int
                 height: Int
               `,
-              contentDetails: `
+          contentDetails: `
                 videoPublishedAt: Date
                 videoId: String
               `
-          }
+        }
 
       }
     },
@@ -150,25 +151,28 @@ module.exports = {
         icon: favicon
       }
     },
-    // {
-    //   resolve: `gatsby-plugin-purgecss`,
-    //   options: {
-    //     printRejected: true, // Print removed selectors and processed file names
-    //     develop: true, // Enable while using `gatsby develop`
-    //     // tailwind: true, // Enable tailwindcss support
-    //     whitelist: ['blockquote', 'embed-youtube', 'video-wrapper'], // Don't remove this selector
-    //     // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-    //     // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
-    //   }
-    // },
-    'gatsby-plugin-offline',
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: true, // Print removed selectors and processed file names
+        develop: true, // Enable while using `gatsby develop`
+        //tailwind: true, // Enable tailwindcss support
+        whitelist: ['blockquote', 'embed-youtube', 'video-wrapper'], // Don't remove this selector
+        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+        // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
+      }
+    },
+    'gatsby-plugin-remove-serviceworker',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: siteUrl,
         sitemap: `${siteUrl}/sitemap.xml`,
-        policy: [{ userAgent: '*', disallow: '' }]
+        policy: [{
+          userAgent: '*',
+          disallow: ''
+        }]
       }
     }
   ]
