@@ -207,7 +207,7 @@ function Links(props) {
     </div> */}
     <div className="Links">
       {links.map((link,i)=>{
-        return (<div className="link fadeInUp" style={{animationDelay: `${i*0.1}s`}}>
+        return (<div key={link.URL} className="link fadeInUp" style={{animationDelay: `${i*0.1}s`}}>
         <h3>{link.Topic} <span>({link["Ministry or Organisation"]})</span></h3>
         <a href={link.URL}>
           {link.URL}
