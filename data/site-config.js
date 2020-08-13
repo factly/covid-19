@@ -9,7 +9,7 @@ module.exports = {
   type: 'website',
   author: 'factly',
   lang: 'te',
-  googleAnalyticsID: '', // GA tracking ID.
+  googleAnalyticsID: 'UA-58882406-1', // GA tracking ID.
   backgroundColor: '#fff',
   themeColor: '#fff',
   favicon: `${__dirname}/../src/static/images/favicon.png`
