@@ -33,7 +33,6 @@ module.exports = {
       resolve: "gatsby-source-wordpress",
       options: {
         baseUrl: "factly.in",
-        //https://factly.in/wp-json/wp/v2/posts?categories=420
         protocol: "https",
         restApiRoutePrefix: "wp-json",
         hostingWPCOM: false,
@@ -41,7 +40,7 @@ module.exports = {
         queryParams: [{
             matchRoute: "/posts",
             query: {
-              categories: "420"
+              categories: "440"
             }
           },
           {
